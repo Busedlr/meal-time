@@ -18,11 +18,11 @@ import {
 export class RecipeCreatePage implements OnInit {
   db: any;
   recipesRef: any;
-
   recipeForm: FormGroup;
-
   ingredientCount: number = 1;
   ingredientControls: any[] = [];
+  stepCount: number = 1;
+  stepControls: any[] = [];
 
   constructor(public formBuilder: FormBuilder) {
     this.db = firebase.firestore();
@@ -34,12 +34,30 @@ export class RecipeCreatePage implements OnInit {
 
   initForm() {
     this.recipeForm = this.formBuilder.group({
-      ingredient1: ["", Validators.required],
-      name: ["", Validators.required],
-      servings: ["", Validators.required]
+      ingredient1: [
+        "",
+        Validators.compose([
+          Validators.maxLength(50),
+          Validators.minLength(2),
+          Validators.required
+        ])
+      ],
+      name: [
+        "",
+        Validators.compose([
+          Validators.maxLength(100),
+          Validators.minLength(3),
+          Validators.required
+        ])
+      ],
+      servings: ["", Validators.required],
+      prepTime: ["", Validators.required],
+      cookingTime: ["", Validators.required],
+      step1: ["", Validators.required]
     });
 
     this.initIngredientControls();
+    this.initStepControls();
   }
 
   initIngredientControls() {
@@ -50,7 +68,15 @@ export class RecipeCreatePage implements OnInit {
     });
   }
 
-  addControl() {
+  initStepControls() {
+    this.stepControls = [];
+    this.stepControls.push({
+      name: "step1",
+      control: this.recipeForm.controls.step1
+    });
+  }
+
+  addIngredientControl() {
     this.ingredientCount++;
 
     this.recipeForm.addControl(
@@ -65,20 +91,41 @@ export class RecipeCreatePage implements OnInit {
     });
   }
 
-  removeControl(control, index) {
+  addStepControl() {
+    this.stepCount++;
+
+    this.recipeForm.addControl(
+      "step" + this.stepCount,
+      new FormControl("", Validators.required)
+    );
+
+    let stepName = "step" + this.stepCount;
+    this.stepControls.push({
+      name: stepName,
+      control: this.recipeForm.controls[stepName]
+    });
+  }
+
+  removeIngredientControl(control, index) {
     this.recipeForm.removeControl(control.name);
     this.ingredientControls.splice(index, 1);
   }
 
+  removeStepControl(control, index) {
+    this.recipeForm.removeControl(control.name);
+    this.stepControls.splice(index, 1);
+  }
+
   saveRecipe() {
-    let recipeData = {ingredients: []};
-    
+    let recipeData = { ingredients: [], steps: [] };
 
     Object.keys(this.recipeForm.controls).forEach(key => {
       let value = this.recipeForm.controls[key].value;
 
       if (key.includes("ingredient")) {
         recipeData.ingredients.push(value);
+      } else if (key.includes("step")) {
+        recipeData.steps.push(value);
       } else {
         recipeData[key] = value;
       }
@@ -94,5 +141,4 @@ export class RecipeCreatePage implements OnInit {
       });
     this.initForm();
   }
-
 }

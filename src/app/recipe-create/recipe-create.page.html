@@ -2,7 +2,7 @@
   <form [formGroup]="recipeForm">
     <ion-item>
       <ion-label position="floating">Recipe Name</ion-label>
-      <ion-input formControlName="name"></ion-input>
+      <ion-input autofocus formControlName="name"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -10,24 +10,53 @@
       <ion-input type="number" formControlName="servings"></ion-input>
     </ion-item>
 
-    <ion-label position="fixed">Ingredients</ion-label>
+    
+    <ion-item>
+        <ion-label position="floating">Prep time in minutes</ion-label>
+        <ion-input type="number" formControlName="prepTime"></ion-input>
+      </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Cooking time in minutes</ion-label>
+        <ion-input type="number" formControlName="cookingTime"></ion-input>
+      </ion-item>
+
+
+     <ion-label position="fixed">Ingredients</ion-label>
     <ion-item *ngFor="let control of ingredientControls; let i = index">
       <ion-input
-        required
         type="text"
         [formControlName]="control.name"
         placeHolder="ingredient name..."
       ></ion-input>
       <ion-icon
         *ngIf="ingredientControls.length > 1"
-        (click)="removeControl(control, i)"
+        (click)="removeIngredientControl(control, i)"
         name="close-circle"
       ></ion-icon>
     </ion-item>
 
-    <ion-button expand="full" color="light" (click)="addControl()"
+    <ion-button expand="full" color="light" (click)="addIngredientControl()"
       >Add Ingredient</ion-button
     >
+
+    <ion-label position="fixed">Steps</ion-label>
+    <ion-item *ngFor="let control of stepControls; let i = index">
+      <ion-input
+        type="text"
+        [formControlName]="control.name"
+        placeHolder="next step is..."
+      ></ion-input>
+      <ion-icon
+        *ngIf="stepControls.length > 1"
+        (click)="removeStepControl(control, i)"
+        name="close-circle"
+      ></ion-icon>
+    </ion-item>
+
+    <ion-button expand="full" color="light" (click)="addStepControl()"
+      >Add another step</ion-button>
+
   </form>
   <ion-button [disabled]="!recipeForm.valid" (click)="saveRecipe()"
     >Save Recipe</ion-button
