@@ -1,0 +1,35 @@
+<ion-content>
+  <form [formGroup]="recipeForm">
+    <ion-item>
+      <ion-label position="floating">Recipe Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Servings</ion-label>
+      <ion-input type="number" formControlName="servings"></ion-input>
+    </ion-item>
+
+    <ion-label position="fixed">Ingredients</ion-label>
+    <ion-item *ngFor="let control of ingredientControls; let i = index">
+      <ion-input
+        required
+        type="text"
+        [formControlName]="control.name"
+        placeHolder="ingredient name..."
+      ></ion-input>
+      <ion-icon
+        *ngIf="ingredientControls.length > 1"
+        (click)="removeControl(control, i)"
+        name="close-circle"
+      ></ion-icon>
+    </ion-item>
+
+    <ion-button expand="full" color="light" (click)="addControl()"
+      >Add Ingredient</ion-button
+    >
+  </form>
+  <ion-button [disabled]="!recipeForm.valid" (click)="saveRecipe()"
+    >Save Recipe</ion-button
+  >
+</ion-content>
