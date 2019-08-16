@@ -71,10 +71,19 @@ export class RecipeCreatePage implements OnInit {
   }
 
   saveRecipe() {
-    let recipeData = {};
+    let recipeData = {ingredients: []};
+    
+
     Object.keys(this.recipeForm.controls).forEach(key => {
-      recipeData[key] = this.recipeForm.controls[key].value;
+      let value = this.recipeForm.controls[key].value;
+
+      if (key.includes("ingredient")) {
+        recipeData.ingredients.push(value);
+      } else {
+        recipeData[key] = value;
+      }
     });
+
     this.recipesRef
       .add(recipeData)
       .then(doc => {
@@ -83,6 +92,7 @@ export class RecipeCreatePage implements OnInit {
       .catch(error => {
         console.log(error);
       });
-      this.initForm();
+    this.initForm();
   }
+
 }
