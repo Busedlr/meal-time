@@ -156,27 +156,29 @@ export class RecipeCreatePage implements OnInit {
       .catch(error => {
         console.log(error);
       });
-
-    this.imageRef
-      .put(this.file)
-      .then(result => {
-        console.log(result);
-        this.initForm();
-        //success feedback
-      })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
   addRecipeImage(event) {
     let path = "recipe_images/" + this.recipeForm.controls.name.value;
     this.imageRef = this.storageRef.child(path);
     this.file = event.srcElement.files[0];
-    if(this.file && (this.file.type === 'image/jpeg' || this.file.type === 'image/png') && this.file.size <= 5e+6 ){
-      console.log(this.file)
+    if (
+      this.file &&
+      (this.file.type === "image/jpeg" || this.file.type === "image/png") &&
+      this.file.size <= 5e6
+    ) {
       this.imageValid = true;
-    } 
+      this.imageRef
+        .put(this.file)
+        .then(result => {
+          console.log(result);
+          this.initForm();
+          //success feedback
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 
   resetInput(fileId) {

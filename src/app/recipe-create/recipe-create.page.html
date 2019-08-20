@@ -60,9 +60,13 @@
 
   </form>
 
-  <ion-button [disabled]="!recipeForm.valid || !imageValid" (click)="saveRecipe()"
+ <!--  <ion-button [disabled]="!recipeForm.valid || !imageValid" (click)="saveRecipe()"
     >Save Recipe</ion-button
-  >
+  > -->
+
+  <ion-button (click)="saveRecipe()"
+  >Save Recipe</ion-button
+>
 
   <label for="recipeImage" (click)="resetInput('recipeImage')">Add an image for your recipe</label>
   <input type="file" id="recipeImage" (change)="addRecipeImage($event)">
