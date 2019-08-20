@@ -4,6 +4,8 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 
+import { RecipeDataService } from "../services/recipe-data.service";
+
 import {
   FormBuilder,
   FormGroup,
@@ -17,8 +19,6 @@ import {
   styleUrls: ["./recipe-create.page.scss"]
 })
 export class RecipeCreatePage implements OnInit {
-  db: any;
-  recipesRef: any;
   storageRef: any;
   imageRef: any;
   recipeForm: FormGroup;
@@ -29,9 +29,10 @@ export class RecipeCreatePage implements OnInit {
   imageValid: boolean = false;
   file: any;
 
-  constructor(public formBuilder: FormBuilder) {
-    this.db = firebase.firestore();
-    this.recipesRef = this.db.collection("recipes");
+  constructor(
+    public formBuilder: FormBuilder,
+    public recipeService: RecipeDataService
+  ) {
     this.storageRef = firebase.storage().ref();
     this.imageRef = this.storageRef.child("recipe_images");
     this.initForm();
@@ -147,15 +148,7 @@ export class RecipeCreatePage implements OnInit {
         recipeData[key] = value;
       }
     });
-
-    this.recipesRef
-      .add(recipeData)
-      .then(doc => {
-        console.log("document saved with id", doc.id);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.recipeService.saveRecipe(recipeData);
   }
 
   addRecipeImage(event) {
