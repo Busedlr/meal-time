@@ -152,6 +152,13 @@ export class RecipeCreatePage implements OnInit {
   }
 
   addRecipeImage(event) {
+    /* let path = "recipe_images/" + this.recipeForm.controls.name.value;
+    this.imageRef = this.storageRef.child(path); */
+
+    this.recipeService.addRecipeImage(event);
+  }
+
+  /* addRecipeImage(event) {
     let path = "recipe_images/" + this.recipeForm.controls.name.value;
     this.imageRef = this.storageRef.child(path);
     this.file = event.srcElement.files[0];
@@ -172,7 +179,7 @@ export class RecipeCreatePage implements OnInit {
           console.log(error);
         });
     }
-  }
+  } */
 
   resetInput(fileId) {
     let fileInput = document.getElementById(fileId) as HTMLInputElement;

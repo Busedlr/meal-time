@@ -10,10 +10,14 @@ import "firebase/storage";
 export class RecipeDataService {
   db: any;
   recipesRef: any;
+  storageRef: any;
+  imageRef: any;
 
   constructor() {
     this.db = firebase.firestore();
     this.recipesRef = this.db.collection("recipes");
+    this.storageRef = firebase.storage().ref();
+    this.imageRef = this.storageRef.child("recipe_images");
   }
 
   saveRecipe(recipeData) {
@@ -26,4 +30,20 @@ export class RecipeDataService {
         console.log(error);
       });
   }
+
+  
+  addRecipeImage(event) {
+    let file = event.srcElement.files[0];
+
+    this.imageRef
+      .put(file)
+      .then(result => {
+        console.log(result);
+        //success feedback
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
 }
