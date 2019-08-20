@@ -2,7 +2,7 @@
   <form [formGroup]="recipeForm">
     <ion-item>
       <ion-label position="floating">Recipe Name</ion-label>
-      <ion-input autofocus formControlName="name" id="testIdTwo"></ion-input>
+      <ion-input autofocus formControlName="name"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -59,7 +59,11 @@
       >Add another step</ion-button>
 
   </form>
-  <ion-button [disabled]="!recipeForm.valid" (click)="saveRecipe()"
+
+  <ion-button [disabled]="!recipeForm.valid || !imageValid" (click)="saveRecipe()"
     >Save Recipe</ion-button
   >
+
+  <label for="recipeImage" (click)="resetInput('recipeImage')">Add an image for your recipe</label>
+  <input type="file" id="recipeImage" (change)="addRecipeImage($event)">
 </ion-content>

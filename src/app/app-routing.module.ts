@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'recipe-create', loadChildren: './recipe-create/recipe-create.module#RecipeCreatePageModule' },
+  { path: 'recipe-list', loadChildren: './recipe-list/recipe-list.module#RecipeListPageModule' },
 ];
 
 @NgModule({
