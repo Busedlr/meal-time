@@ -11,13 +11,12 @@ export class RecipeDataService {
   db: any;
   recipesRef: any;
   storageRef: any;
-  imageRef: any;
+  storageFolder: string = "recipe_images/";
 
   constructor() {
     this.db = firebase.firestore();
     this.recipesRef = this.db.collection("recipes");
     this.storageRef = firebase.storage().ref();
-    this.imageRef = this.storageRef.child("recipe_images");
   }
 
   saveRecipe(recipeData) {
@@ -31,11 +30,10 @@ export class RecipeDataService {
       });
   }
 
-  
-  addRecipeImage(event) {
-    let file = event.srcElement.files[0];
-
-    this.imageRef
+  addRecipeImage(file, name) {
+    let path = this.storageFolder + name
+    let imageRef = this.storageRef.child(path);
+    imageRef
       .put(file)
       .then(result => {
         console.log(result);
@@ -45,5 +43,4 @@ export class RecipeDataService {
         console.log(error);
       });
   }
-
 }

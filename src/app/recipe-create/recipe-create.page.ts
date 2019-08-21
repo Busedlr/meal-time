@@ -152,10 +152,11 @@ export class RecipeCreatePage implements OnInit {
   }
 
   addRecipeImage(event) {
-    /* let path = "recipe_images/" + this.recipeForm.controls.name.value;
-    this.imageRef = this.storageRef.child(path); */
-
-    this.recipeService.addRecipeImage(event);
+    let file = event.srcElement.files[0];
+    this.recipeService.addRecipeImage(
+      file,
+      this.recipeForm.controls.name.value
+    );
   }
 
   /* addRecipeImage(event) {
