@@ -1,11 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
-import * as firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/storage";
-
 import { RecipeDataService } from "../services/recipe-data.service";
-
 import {
   FormBuilder,
   FormGroup,
@@ -19,8 +13,6 @@ import {
   styleUrls: ["./recipe-create.page.scss"]
 })
 export class RecipeCreatePage implements OnInit {
-  storageRef: any;
-  imageRef: any;
   recipeForm: FormGroup;
   ingredientCount = 1;
   ingredientControls: any[] = [];
@@ -33,8 +25,6 @@ export class RecipeCreatePage implements OnInit {
     public formBuilder: FormBuilder,
     public recipeService: RecipeDataService
   ) {
-    this.storageRef = firebase.storage().ref();
-    this.imageRef = this.storageRef.child("recipe_images");
     this.initForm();
   }
 
@@ -61,12 +51,53 @@ export class RecipeCreatePage implements OnInit {
       servings: [8, Validators.required],
       prepTime: [15, Validators.required],
       cookingTime: [20, Validators.required],
-      step1: ["step 1", Validators.required]
+      step1: ["step 1", Validators.required],
     });
 
     this.initIngredientControls();
     this.initStepControls();
     this.imageValid = false;
+  }
+
+  saveRecipe() {
+    const recipeData = { ingredients: [], steps: [], path: ""};
+
+    Object.keys(this.recipeForm.controls).forEach(key => {
+      const value = this.recipeForm.controls[key].value;
+      recipeData.path = "recipe_images/" + this.recipeForm.controls.name.value;
+      if (key.includes("ingredient")) {
+        recipeData.ingredients.push(value);
+      } else if (key.includes("step")) {
+        recipeData.steps.push(value);
+      } else {
+        recipeData[key] = value;
+      }
+    });
+    this.recipeService.saveRecipe(recipeData).then(() => {
+      this.recipeService
+        .addRecipeImage(this.file, recipeData.path)
+        .then(() => {
+          this.initForm();
+        });
+    });
+  }
+
+  selectFile(event) {
+    this.imageValid = false;
+    this.file = event.srcElement.files[0];
+    console.log("file:", this.file);
+    if (
+      this.file &&
+      (this.file.type === "image/jpeg" || this.file.type === "image/png") &&
+      this.file.size <= 5e6
+    ) {
+      this.imageValid = true;
+    }
+  }
+
+  resetInput(fileId) {
+    let fileInput = document.getElementById(fileId) as HTMLInputElement;
+    fileInput.value = "";
   }
 
   initIngredientControls() {
@@ -134,56 +165,5 @@ export class RecipeCreatePage implements OnInit {
     this.stepControls.splice(index, 1);
   }
 
-  saveRecipe() {
-    const recipeData = { ingredients: [], steps: [] };
-
-    Object.keys(this.recipeForm.controls).forEach(key => {
-      const value = this.recipeForm.controls[key].value;
-
-      if (key.includes("ingredient")) {
-        recipeData.ingredients.push(value);
-      } else if (key.includes("step")) {
-        recipeData.steps.push(value);
-      } else {
-        recipeData[key] = value;
-      }
-    });
-    this.recipeService.saveRecipe(recipeData);
-  }
-
-  addRecipeImage(event) {
-    let file = event.srcElement.files[0];
-    this.recipeService.addRecipeImage(
-      file,
-      this.recipeForm.controls.name.value
-    );
-  }
-
-  /* addRecipeImage(event) {
-    let path = "recipe_images/" + this.recipeForm.controls.name.value;
-    this.imageRef = this.storageRef.child(path);
-    this.file = event.srcElement.files[0];
-    if (
-      this.file &&
-      (this.file.type === "image/jpeg" || this.file.type === "image/png") &&
-      this.file.size <= 5e6
-    ) {
-      this.imageValid = true;
-      this.imageRef
-        .put(this.file)
-        .then(result => {
-          console.log(result);
-          this.initForm();
-          //success feedback
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
-  } */
-
-  resetInput(fileId) {
-    let fileInput = document.getElementById(fileId) as HTMLInputElement;
-    fileInput.value = "";
-  }
+  
 }

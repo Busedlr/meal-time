@@ -1,8 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
-import * as firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/storage";
+import { RecipeDataService } from "../services/recipe-data.service";
 
 @Component({
   selector: "app-recipe-list",
@@ -11,40 +8,33 @@ import "firebase/storage";
 })
 export class RecipeListPage implements OnInit {
   db: any;
-  recipesRef: any;
-  recipeImagesRef: any;
-  storageRef: any;
   recipes: any = [];
-  imageUrl: any;
+  imageUrl:any
 
-  constructor() {
-    this.db = firebase.firestore();
-    this.recipesRef = this.db.collection("recipes");
-    this.storageRef = firebase.storage().ref();
-
+  constructor(public recipeService: RecipeDataService) {
     this.getRecipes();
   }
 
   ngOnInit() {}
 
   getRecipes() {
-    this.recipesRef
-      .get()
-      .then(result => {
-        result.forEach(document => {
-          let recipe = document.data();
-          recipe.id = document.id;
-          this.recipes.push(recipe);
-        });
-        console.log("recipes:", this.recipes);
+    this.recipeService.getRecipes().then((result) => {
+      result.docs.forEach((doc) => {
+        this.recipes.push(doc.data())
       })
-      .catch(error => {
-        console.log(error);
-      });
-    this.getRecipeImage();
+    })
   }
 
   getRecipeImage() {
+    this.recipeService.getRecipeImage();
+  }
+  
+
+
+
+  
+/*   getRecipeImage() {
+    //old function to get recipe image
     this.recipeImagesRef
       .getDownloadURL()
       .then(url => {
@@ -53,5 +43,7 @@ export class RecipeListPage implements OnInit {
       .catch(error => {
         console.log(error);
       });
-  }
+  } */
+
+ 
 }

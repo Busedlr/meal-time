@@ -10,25 +10,23 @@
       <ion-input type="number" formControlName="servings"></ion-input>
     </ion-item>
 
-    
     <ion-item>
-        <ion-label position="floating">Prep time in minutes</ion-label>
-        <ion-input type="number" formControlName="prepTime"></ion-input>
-      </ion-item>
+      <ion-label position="floating">Prep time in minutes</ion-label>
+      <ion-input type="number" formControlName="prepTime"></ion-input>
+    </ion-item>
 
     <ion-item>
-        <ion-label position="floating">Cooking time in minutes</ion-label>
-        <ion-input type="number" formControlName="cookingTime"></ion-input>
-      </ion-item>
+      <ion-label position="floating">Cooking time in minutes</ion-label>
+      <ion-input type="number" formControlName="cookingTime"></ion-input>
+    </ion-item>
 
-
-     <ion-label position="fixed">Ingredients</ion-label>
+    <ion-label position="fixed">Ingredients</ion-label>
     <ion-item *ngFor="let control of ingredientControls; let i = index">
       <ion-input
         type="text"
         [formControlName]="control.name"
         placeHolder="ingredient name..."
-        id="{{control.name}}"
+        id="{{ control.name }}"
       ></ion-input>
       <ion-icon
         *ngIf="ingredientControls.length > 1"
@@ -56,18 +54,18 @@
     </ion-item>
 
     <ion-button expand="full" color="light" (click)="addStepControl()"
-      >Add another step</ion-button>
-
+      >Add another step</ion-button
+    >
   </form>
 
- <!--  <ion-button [disabled]="!recipeForm.valid || !imageValid" (click)="saveRecipe()"
+  <ion-button
+    [disabled]="!recipeForm.valid || !imageValid"
+    (click)="saveRecipe()"
     >Save Recipe</ion-button
-  > -->
+  >
 
-  <ion-button (click)="saveRecipe()"
-  >Save Recipe</ion-button
->
-
-  <label for="recipeImage" (click)="resetInput('recipeImage')">Add an image for your recipe</label>
-  <input type="file" id="recipeImage" (change)="addRecipeImage($event)">
+  <label for="recipeImage" (click)="resetInput('recipeImage')"
+    >Add an image for your recipe</label
+  >
+  <input type="file" id="recipeImage" (change)="selectFile($event)" />
 </ion-content>
