@@ -85,7 +85,6 @@ export class RecipeCreatePage implements OnInit {
   selectFile(event) {
     this.imageValid = false;
     this.file = event.srcElement.files[0];
-    console.log("file:", this.file);
     if (
       this.file &&
       (this.file.type === "image/jpeg" || this.file.type === "image/png") &&

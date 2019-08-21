@@ -9,7 +9,7 @@ import { RecipeDataService } from "../services/recipe-data.service";
 export class RecipeListPage implements OnInit {
   db: any;
   recipes: any = [];
-  imageUrl:any
+  imageUrl: any;
 
   constructor(public recipeService: RecipeDataService) {
     this.getRecipes();
@@ -18,32 +18,14 @@ export class RecipeListPage implements OnInit {
   ngOnInit() {}
 
   getRecipes() {
-    this.recipeService.getRecipes().then((result) => {
-      result.docs.forEach((doc) => {
-        this.recipes.push(doc.data())
-      })
-    })
-  }
-
-  getRecipeImage() {
-    this.recipeService.getRecipeImage();
-  }
-  
-
-
-
-  
-/*   getRecipeImage() {
-    //old function to get recipe image
-    this.recipeImagesRef
-      .getDownloadURL()
-      .then(url => {
-        this.imageUrl = url;
-      })
-      .catch(error => {
-        console.log(error);
+    this.recipeService.getRecipes().then(result => {
+      result.docs.forEach(doc => {
+        let recipe = doc.data();
+        this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
+          recipe.imageUrl = url;
+          this.recipes.push(recipe);
+        });
       });
-  } */
-
- 
+    });
+  }
 }

@@ -4,7 +4,6 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 
-
 @Injectable({
   providedIn: "root"
 })
@@ -14,8 +13,6 @@ export class RecipeDataService {
   storageRef: any;
   storageFolder: string = "recipe_images/";
   recipeImagesRef: any;
-  imageRef: any;
-  imageUrl: any;
 
   constructor() {
     this.db = firebase.firestore();
@@ -35,8 +32,8 @@ export class RecipeDataService {
   }
 
   addRecipeImage(file, path) {
-    this.imageRef = this.storageRef.child(path);
-    return this.imageRef
+    let imageRef = this.storageRef.child(path);
+    return imageRef
       .put(file)
       .then(result => {
         console.log(result);
@@ -51,23 +48,20 @@ export class RecipeDataService {
     return this.recipesRef
       .get()
       .then(result => {
-        return result
-        })
+        return result;
+      })
       .catch(error => {
         console.log(error);
       });
     /* this.getRecipeImage(); */
   }
 
-  getRecipeImage() {
-    return this.imageRef
-      .getDownloadURL()
-      .then(url => {
-        return this.imageUrl = url;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  getRecipeImageUrl(path) {
+    return this.storageRef.child(path)
+    .getDownloadURL()
+    .then((url) => {
+      return url
+    })
   }
 
 }
