@@ -6,7 +6,7 @@
 <ion-content>
   <div class="main-container">
     <div *ngFor="let recipe of recipes">
-      <ion-card class="recipe-card" (click)="recipeDetail(recipe.id)">
+      <ion-card class="recipe-card" (click)="goToRecipeDetail(recipe.id)">
         recipe: {{ recipe.name }} cooking time:
         {{ recipe.cookingTime }} ingredients: {{ recipe.ingredients }}
         <img

@@ -70,6 +70,7 @@ export class RecipeDataService {
       .get()
       .then(result => {
         return result;
+        console.log("it worked")
       })
       .catch(error => {
         console.log(error);
