@@ -3,12 +3,18 @@
     <ion-title>recipe-list</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-<div *ngFor="let recipe of recipes">
-recipe: {{ recipe.name }}
-cooking time: {{ recipe.cookingTime }}
-ingredients: {{ recipe.ingredients }}
-<img src="{{ recipe.imageUrl }}" alt="recipe image" width="100px" height="100px">
-</div>
+  <div class="main-container">
+    <div *ngFor="let recipe of recipes">
+      <ion-card class="recipe-card" (click)="recipeDetail(recipe.id)">
+        recipe: {{ recipe.name }} cooking time:
+        {{ recipe.cookingTime }} ingredients: {{ recipe.ingredients }}
+        <img
+          class="recipe-image"
+          src="{{ recipe.imageUrl }}"
+          alt="recipe image"
+        />
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

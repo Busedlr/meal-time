@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
+import { AngularDelegate } from "@ionic/angular";
 
 @Injectable({
   providedIn: "root"
@@ -11,8 +12,6 @@ export class RecipeDataService {
   db: any;
   recipesRef: any;
   storageRef: any;
-  storageFolder: string = "recipe_images/";
-  recipeImagesRef: any;
 
   constructor() {
     this.db = firebase.firestore();
@@ -57,11 +56,23 @@ export class RecipeDataService {
   }
 
   getRecipeImageUrl(path) {
-    return this.storageRef.child(path)
-    .getDownloadURL()
-    .then((url) => {
-      return url
-    })
+    return this.storageRef
+      .child(path)
+      .getDownloadURL()
+      .then(url => {
+        return url;
+      });
   }
 
+  //delete this if getting data by id doesnt work
+  getRecipeDetail(id) {
+    return this.db.collection("recipes").doc(id)
+      .get()
+      .then(result => {
+        return result;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 }

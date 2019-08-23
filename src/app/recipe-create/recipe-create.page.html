@@ -58,14 +58,18 @@
     >
   </form>
 
+  <label for="recipeImage" (click)="resetInput(recipeImageInput)"
+    >Add an image for your recipe</label
+  >
+  <input
+    type="file"
+    id="{{ recipeImageInput }}"
+    (change)="selectFile($event)"
+  />
+
   <ion-button
     [disabled]="!recipeForm.valid || !imageValid"
     (click)="saveRecipe()"
     >Save Recipe</ion-button
   >
-
-  <label for="recipeImage" (click)="resetInput('recipeImage')"
-    >Add an image for your recipe</label
-  >
-  <input type="file" id="recipeImage" (change)="selectFile($event)" />
 </ion-content>

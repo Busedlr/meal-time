@@ -20,6 +20,7 @@ export class RecipeCreatePage implements OnInit {
   stepControls: any[] = [];
   imageValid: boolean = false;
   file: any;
+  recipeImageInput: string = "recipeImage";
 
   constructor(
     public formBuilder: FormBuilder,
@@ -78,6 +79,7 @@ export class RecipeCreatePage implements OnInit {
         .addRecipeImage(this.file, recipeData.path)
         .then(() => {
           this.initForm();
+          this.resetInput(this.recipeImageInput);
         });
     });
   }
@@ -94,8 +96,8 @@ export class RecipeCreatePage implements OnInit {
     }
   }
 
-  resetInput(fileId) {
-    let fileInput = document.getElementById(fileId) as HTMLInputElement;
+  resetInput(inputId) {
+    let fileInput = document.getElementById(inputId) as HTMLInputElement;
     fileInput.value = "";
   }
 
@@ -104,14 +106,6 @@ export class RecipeCreatePage implements OnInit {
     this.ingredientControls.push({
       name: "ingredient1",
       control: this.recipeForm.controls.ingredient1
-    });
-  }
-
-  initStepControls() {
-    this.stepControls = [];
-    this.stepControls.push({
-      name: "step1",
-      control: this.recipeForm.controls.step1
     });
   }
 
@@ -133,6 +127,16 @@ export class RecipeCreatePage implements OnInit {
 			this.focusInput(ingredientName);
 		}, 100); */
   }
+
+  initStepControls() {
+    this.stepControls = [];
+    this.stepControls.push({
+      name: "step1",
+      control: this.recipeForm.controls.step1
+    });
+  }
+
+  
 
   /* 	focusInput(id) {
 		document.getElementById(id).setFocus();
@@ -163,6 +167,7 @@ export class RecipeCreatePage implements OnInit {
     this.recipeForm.removeControl(control.name);
     this.stepControls.splice(index, 1);
   }
+
 
   
 }

@@ -6,6 +6,7 @@ import { RecipeDataService } from "../services/recipe-data.service";
   templateUrl: "./recipe-list.page.html",
   styleUrls: ["./recipe-list.page.scss"]
 })
+
 export class RecipeListPage implements OnInit {
   db: any;
   recipes: any = [];
@@ -21,11 +22,20 @@ export class RecipeListPage implements OnInit {
     this.recipeService.getRecipes().then(result => {
       result.docs.forEach(doc => {
         let recipe = doc.data();
+        recipe.id = doc.id;
         this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
           recipe.imageUrl = url;
           this.recipes.push(recipe);
         });
       });
     });
+  }
+
+    
+  recipeDetail(id) {
+this.recipeService.getRecipeDetail(id)
+.then((result) => {
+  console.log(result.data().name)
+})
   }
 }
