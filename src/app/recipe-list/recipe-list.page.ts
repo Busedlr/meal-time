@@ -30,11 +30,4 @@ export class RecipeListPage implements OnInit {
       });
     });
   }
-
-  goToRecipeDetail(id) {
-    this.recipeService.getRecipeDetail(id).then(result => {
-      this.router.navigate(["recipe-detail"]);
-      console.log(result.data().name); //delete this
-    });
-  }
 }

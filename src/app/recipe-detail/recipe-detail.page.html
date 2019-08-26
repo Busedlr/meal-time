@@ -5,7 +5,16 @@
 </ion-header>
 
 <ion-content>
-<div>
-  recipe Name: {{  }}
-</div>
+  <div class="main-container">
+    <ion-card
+      class="recipe-card">
+      recipe: {{ recipe.name }} cooking time:
+      {{ recipe.cookingTime }} ingredients: {{ recipe.ingredients }}
+      <img
+        class="recipe-image"
+        src="{{ imageUrl }}"
+        alt="recipe image"
+      />
+    </ion-card>
+  </div>
 </ion-content>

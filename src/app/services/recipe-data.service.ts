@@ -64,13 +64,13 @@ export class RecipeDataService {
       });
   }
 
-  //delete this if getting data by id doesnt work
   getRecipeDetail(id) {
-    return this.db.collection("recipes").doc(id)
+    return this.db
+      .collection("recipes")
+      .doc(id)
       .get()
       .then(result => {
         return result;
-        console.log("it worked")
       })
       .catch(error => {
         console.log(error);
