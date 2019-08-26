@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'recipe-create', loadChildren: './recipe-create/recipe-create.module#RecipeCreatePageModule' },
   { path: 'recipe-list', loadChildren: './recipe-list/recipe-list.module#RecipeListPageModule' },
   { path: 'recipe-detail/:id', loadChildren: './recipe-detail/recipe-detail.module#RecipeDetailPageModule' },
+  { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
 ];
 
