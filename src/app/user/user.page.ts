@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserDataService } from "../services/user-data.service";
+import { Router } from "@angular/Router";
+import { create } from 'domain';
 
 @Component({
   selector: "app-user",
@@ -9,7 +11,20 @@ import { UserDataService } from "../services/user-data.service";
 export class UserPage implements OnInit {
   file: any;
   imageValid: boolean = false;
-  constructor(public userService: UserDataService) {}
+  user: any;
+  userData: any;
+
+  constructor(public userService: UserDataService, public router: Router) {
+    /* this.userService.userDetected.subscribe(doc => {
+      this.user = doc;
+      this.userData = doc.data();
+      console.log("doc:", doc)
+      console.log("docdata:", doc.data())
+      console.log("userinside", this.user)
+    console.log("userdatainside:", this.userData)
+    });
+    //this.user stays undefined */
+  }
 
   ngOnInit() {}
 
@@ -31,7 +46,14 @@ export class UserPage implements OnInit {
   }
 
   saveProfileImage() {
-    let path = "user_images/buse"
-    this.userService.addProfileImage(this.file, path)
+    this.userService.addProfileImage(this.file);
   }
+
+
+  /*  getUser() { // this also worked but doesnt work after refreshing!!!
+    this.user = this.userService.user
+    this.userData = this.userService.userData
+    console.log("username",this.userData.userName)
+    console.log("userdata",this.userData)
+  } */
 }

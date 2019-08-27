@@ -6,6 +6,10 @@
 
 <ion-content>
   <form [formGroup]="userForm">
+      <ion-item>
+          <ion-label position="floating">User Name</ion-label>
+          <ion-input autofocus formControlName="username"></ion-input>
+        </ion-item>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
       <ion-input autofocus formControlName="email"></ion-input>
@@ -16,4 +20,5 @@
       </ion-item>
   </form>
   <ion-button (click)="register()">register</ion-button>
+  <ion-button routerLink="/login" routerLinkActive="active">Already a member? Login</ion-button>
 </ion-content>

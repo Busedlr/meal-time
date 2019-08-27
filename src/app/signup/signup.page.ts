@@ -29,43 +29,39 @@ export class SignupPage implements OnInit {
 
   initForm() {
     this.userForm = this.formBuilder.group({
+      username: ["", Validators.required],
       email: ["", Validators.compose([Validators.email, Validators.required])],
       password: ["", Validators.required]
     });
   }
 
   register() {
+    let name = this.userForm.controls.username.value;
     let email = this.userForm.controls.email.value;
     let password = this.userForm.controls.password.value;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
-        this.saveUser(result);
-        this.getSignedInUser();
-        this.initForm();
+        this.saveUser(result, name);
+        this.findLoggedInUser();
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  saveUser(res) {
+  saveUser(res, name) {
     let userData = {
-      email: res.user.email
-    };
+      email: res.user.email,
+      userName: name,    };
     this.userService.saveUser(userData).then(res => {
-      console.log(res);
+      console.log(userData.userName)
+      console.log("saveuser:", res);
     });
   }
 
-  getSignedInUser() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log("user is signedin", user);
-      } else {
-        console.log("No user is signed in.");
-      }
-    });
+  findLoggedInUser() {
+    this.userService.getLoggedInUser()
   }
 }

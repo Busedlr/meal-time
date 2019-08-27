@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
-  { path: 'recipe-create', loadChildren: './recipe-create/recipe-create.module#RecipeCreatePageModule' },
+  { path: '', redirectTo: 'signup', pathMatch: 'full' },
+  { path: 'signup', loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)},
+  { path: 'recipe-create/:id', loadChildren: './recipe-create/recipe-create.module#RecipeCreatePageModule' },
   { path: 'recipe-list', loadChildren: './recipe-list/recipe-list.module#RecipeListPageModule' },
   { path: 'recipe-detail/:id', loadChildren: './recipe-detail/recipe-detail.module#RecipeDetailPageModule' },
-  { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'user', loadChildren: './user/user.module#UserPageModule' },
 ];

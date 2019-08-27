@@ -4,7 +4,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { UserDataService } from "../services/user-data.service";
-import { Router } from "@angular/router"
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -38,25 +38,10 @@ export class LoginPage implements OnInit {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.getSignedInUser();
+        this.userService.getLoggedInUser();
       })
       .catch(error => {
         console.log(error);
       });
   }
-
-  getSignedInUser() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.userService.findUser(user)
-        .then(userData => {
-          this.router.navigate(['/user'])
-        })
-      } else {
-        console.log("No user is signed in.");
-      }
-    });
-  }
 }
-
-
