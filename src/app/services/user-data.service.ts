@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/storage";
 
 @Injectable({
   providedIn: "root"
@@ -8,10 +9,12 @@ import "firebase/firestore";
 export class UserDataService {
   db: any;
   usersRef: any;
+  storageRef: any;
 
   constructor() {
     this.db = firebase.firestore();
     this.usersRef = this.db.collection("users");
+    this.storageRef = firebase.storage().ref();
   }
 
   testFunction() {
@@ -32,13 +35,26 @@ export class UserDataService {
   findUser(user) {
     let userEmail = user.email;
     console.log(userEmail)
-    this.usersRef
+   return this.usersRef
       .where("email", "==", userEmail)
       .get()
       .then((docs) => docs.forEach(doc => {
         let userData = doc.data();
-        console.log(userData)
+        return userData
       }))
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  addProfileImage(file, path) {
+    let imageRef = this.storageRef.child(path);
+    return imageRef
+      .put(file)
+      .then(result => {
+        console.log(result);
+        //success feedback
+      })
       .catch(error => {
         console.log(error);
       });

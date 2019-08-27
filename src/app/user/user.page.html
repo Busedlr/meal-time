@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>user</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <label for="userImage" (click)="resetInput(userImageInput)"
+    >Add a profile photo</label
+  >
+  <input type="file" id="{{ userImageInput }}" (change)="selectFile($event)" />
+  <ion-button
+    [disabled]="!imageValid"
+    (click)="saveProfileImage()"
+    >Save Image</ion-button
+  >
+</ion-content>

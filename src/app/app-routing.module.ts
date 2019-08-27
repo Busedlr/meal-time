@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'recipe-detail/:id', loadChildren: './recipe-detail/recipe-detail.module#RecipeDetailPageModule' },
   { path: 'signup', loadChildren: './signup/signup.module#SignupPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'user', loadChildren: './user/user.module#UserPageModule' },
 ];
 
 @NgModule({
