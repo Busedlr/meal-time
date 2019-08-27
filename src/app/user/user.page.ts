@@ -1,21 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { UserDataService } from "../services/user-data.service";
-import { Router } from "@angular/Router";
-import { create } from 'domain';
+import { Component, OnInit } from '@angular/core';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
-  selector: "app-user",
-  templateUrl: "./user.page.html",
-  styleUrls: ["./user.page.scss"]
+	selector: 'app-user',
+	templateUrl: './user.page.html',
+	styleUrls: ['./user.page.scss']
 })
 export class UserPage implements OnInit {
-  file: any;
-  imageValid: boolean = false;
-  user: any;
-  userData: any;
+	file: any;
+	imageValid = false;
+	user: any;
+	userData: any;
 
-  constructor(public userService: UserDataService, public router: Router) {
-    /* this.userService.userDetected.subscribe(doc => {
+	constructor(public userService: UserDataService) {
+		/* this.userService.userDetected.subscribe(doc => {
       this.user = doc;
       this.userData = doc.data();
       console.log("doc:", doc)
@@ -24,33 +22,32 @@ export class UserPage implements OnInit {
     console.log("userdatainside:", this.userData)
     });
     //this.user stays undefined */
-  }
+	}
 
-  ngOnInit() {}
+	ngOnInit() {}
 
-  resetInput(inputId) {
-    let fileInput = document.getElementById(inputId) as HTMLInputElement;
-    fileInput.value = "";
-  }
+	resetInput(inputId) {
+		const fileInput = document.getElementById(inputId) as HTMLInputElement;
+		fileInput.value = '';
+	}
 
-  selectFile(event) {
-    this.imageValid = false;
-    this.file = event.srcElement.files[0];
-    if (
-      this.file &&
-      (this.file.type === "image/jpeg" || this.file.type === "image/png") &&
-      this.file.size <= 5e6
-    ) {
-      this.imageValid = true;
-    }
-  }
+	selectFile(event) {
+		this.imageValid = false;
+		this.file = event.srcElement.files[0];
+		if (
+			this.file &&
+			(this.file.type === 'image/jpeg' || this.file.type === 'image/png') &&
+			this.file.size <= 5e6
+		) {
+			this.imageValid = true;
+		}
+	}
 
-  saveProfileImage() {
-    this.userService.addProfileImage(this.file);
-  }
+	saveProfileImage() {
+		this.userService.addProfileImage(this.file);
+	}
 
-
-  /*  getUser() { // this also worked but doesnt work after refreshing!!!
+	/*  getUser() { // this also worked but doesnt work after refreshing!!!
     this.user = this.userService.user
     this.userData = this.userService.userData
     console.log("username",this.userData.userName)
