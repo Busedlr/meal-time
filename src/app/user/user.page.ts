@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
+import { Router } from "@angular/router";
 
 @Component({
 	selector: 'app-user',
@@ -12,7 +13,7 @@ export class UserPage implements OnInit {
 	user: any;
 	userData: any;
 
-	constructor(public userService: UserDataService) {
+	constructor(public userService: UserDataService, public router: Router) {
 		/* this.userService.userDetected.subscribe(doc => {
       this.user = doc;
       this.userData = doc.data();
@@ -45,7 +46,11 @@ export class UserPage implements OnInit {
 
 	saveProfileImage() {
 		this.userService.addProfileImage(this.file);
-	}
+  }
+  
+  goToRecipeCreate() {
+    this.router.navigate(['/recipe-create'])
+  }
 
 	/*  getUser() { // this also worked but doesnt work after refreshing!!!
     this.user = this.userService.user
