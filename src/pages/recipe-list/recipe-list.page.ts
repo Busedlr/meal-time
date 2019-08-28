@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { RecipeDataService } from "../services/recipe-data.service";
+import { RecipeDataService } from "../../services/recipe-data.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,7 +12,7 @@ export class RecipeListPage implements OnInit {
   recipes: any = [];
   imageUrl: any;
 
-  constructor(public recipeService: RecipeDataService, private router: Router) {
+  constructor(public recipeService: RecipeDataService) {
     this.getRecipes();
   }
 

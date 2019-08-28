@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { UserDataService } from '../services/user-data.service';
+import { UserDataService } from '../../services/user-data.service';
 import { Router } from '@angular/router';
 
 @Component({

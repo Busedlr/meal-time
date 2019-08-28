@@ -5,7 +5,7 @@ import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import { Router } from "@angular/router";
-import { UserDataService } from "../services/user-data.service";
+import { UserDataService } from "../../services/user-data.service";
 
 @Component({
   selector: "app-signup",
