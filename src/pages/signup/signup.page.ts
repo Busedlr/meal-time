@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { Router } from '@angular/router';
 import { UserDataService } from '../../services/user-data.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class SignupPage implements OnInit {
 
 	constructor(
 		public formBuilder: FormBuilder,
-		private router: Router,
 		public userService: UserDataService
 	) {
 		this.initForm();
@@ -36,12 +34,17 @@ export class SignupPage implements OnInit {
 	}
 
 	register() {
-    const controls = this.userForm.controls;
+		console.log('form', this.userForm)
+		const email = this.userForm.controls.email.value;
+		const name = this.userForm.controls.username.value;
+		const password = this.userForm.controls.password.value;
+		/* const controls = this.userForm.controls;
+		console.log('controls', controls) */
 		firebase
 			.auth()
-			.createUserWithEmailAndPassword(controls.email.value, controls.password.value)
+			.createUserWithEmailAndPassword(email, password)
 			.then(result => {
-				this.saveUser(result.user, controls.name.value);
+				this.saveUser(result.user, name);
 				this.findLoggedInUser();
 			})
 			.catch(error => {
