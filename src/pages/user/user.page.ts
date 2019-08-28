@@ -15,7 +15,6 @@ export class UserPage implements OnInit {
   constructor(public userService: UserDataService, public router: Router) {
     this.userService.userDetected.subscribe(doc => {
       this.user = doc;
-      console.log("userinside", this.user);
     });
   }
 

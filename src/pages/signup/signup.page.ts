@@ -1,67 +1,66 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import * as firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import { Router } from "@angular/router";
-import { UserDataService } from "../../services/user-data.service";
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { Router } from '@angular/router';
+import { UserDataService } from '../../services/user-data.service';
 
 @Component({
-  selector: "app-signup",
-  templateUrl: "./signup.page.html",
-  styleUrls: ["./signup.page.scss"]
+	selector: 'app-signup',
+	templateUrl: './signup.page.html',
+	styleUrls: ['./signup.page.scss']
 })
 export class SignupPage implements OnInit {
-  userForm: FormGroup;
-  email: any = "";
-  password: any = "";
+	userForm: FormGroup;
+	email: any = '';
+	password: any = '';
 
-  constructor(
-    public formBuilder: FormBuilder,
-    private router: Router,
-    public userService: UserDataService
-  ) {
-    this.initForm();
-  }
+	constructor(
+		public formBuilder: FormBuilder,
+		private router: Router,
+		public userService: UserDataService
+	) {
+		this.initForm();
+	}
 
-  ngOnInit() {}
+	ngOnInit() {}
 
-  initForm() {
-    this.userForm = this.formBuilder.group({
-      username: ["", Validators.required],
-      email: ["", Validators.compose([Validators.email, Validators.required])],
-      password: ["", Validators.required]
-    });
-  }
+	initForm() {
+		this.userForm = this.formBuilder.group({
+			username: ['', Validators.required],
+			email: ['', Validators.compose([Validators.email, Validators.required])],
+			password: ['', Validators.required]
+		});
+	}
 
-  register() {
-    let name = this.userForm.controls.username.value;
-    let email = this.userForm.controls.email.value;
-    let password = this.userForm.controls.password.value;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(result => {
-        this.saveUser(result, name);
-        this.findLoggedInUser();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+	register() {
+    const controls = this.userForm.controls;
+		firebase
+			.auth()
+			.createUserWithEmailAndPassword(controls.email.value, controls.password.value)
+			.then(result => {
+				this.saveUser(result.user, controls.name.value);
+				this.findLoggedInUser();
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 
-  saveUser(res, name) {
-    let userData = {
-      email: res.user.email,
-      userName: name,    };
-    this.userService.saveUser(userData).then(res => {
-      console.log(userData.userName)
-      console.log("saveuser:", res);
-    });
-  }
+	saveUser(user, name) {
+		const userData = {
+			email: user.email,
+			userName: name
+    };
+    
+    const uid = user.uid
+    this.userService.saveUser(uid, userData).then(() => {});
+    //feedback to user will be added here
+	}
 
-  findLoggedInUser() {
-    this.userService.getLoggedInUser()
-  }
+	findLoggedInUser() {
+		this.userService.getLoggedInUser();
+	}
 }
