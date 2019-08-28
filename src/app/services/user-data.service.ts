@@ -12,7 +12,6 @@ export class UserDataService {
   usersRef: any;
   storageRef: any;
   user: any;
-  userData: any;
 
   userDetected = new EventEmitter<string>();
 
@@ -47,14 +46,32 @@ export class UserDataService {
     });
   }
 
+  /* findUser(user) {
+    return this.usersRef
+      .where("email", "==", user.email)
+      .get()
+      .then(docs =>
+        docs.forEach(doc => {
+          this.user = doc.data();
+          this.user.id = doc.id;
+          this.userDetected.emit(this.user);
+          this.router.navigate(["/user"]);
+        })
+      )
+      .catch(error => {
+        console.log(error);
+      });
+  } */
+
   findUser(user) {
     return this.usersRef
       .where("email", "==", user.email)
       .get()
       .then(docs =>
         docs.forEach(doc => {
-          this.userData = doc.data();
-          this.userDetected.emit(doc);
+          this.user = doc.data();
+          this.user.id = doc.id;
+          this.userDetected.emit(this.user);
           this.router.navigate(["/user"]);
         })
       )
@@ -63,13 +80,12 @@ export class UserDataService {
       });
   }
 
-
   addProfileImage(file) {
-    let path = "user_images/" + this.userData.userName;
+    let path = "user_images/" + this.user.id;
     let imageRef = this.storageRef.child(path);
     return imageRef
       .put(file)
-      .then(result => {
+      .then(() => {
         console.log("profile photo is saved");
         //success feedback
       })
@@ -77,5 +93,4 @@ export class UserDataService {
         console.log(error);
       });
   }
-
 }

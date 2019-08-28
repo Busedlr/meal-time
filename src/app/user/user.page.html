@@ -9,6 +9,7 @@
     >Add a profile photo</label
   >
   <input type="file" id="{{ userImageInput }}" (change)="selectFile($event)" />
+  
   <ion-button [disabled]="!imageValid" (click)="saveProfileImage()"
     >Save Image</ion-button
   >

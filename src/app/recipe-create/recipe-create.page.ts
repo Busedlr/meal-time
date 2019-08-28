@@ -123,9 +123,9 @@ export class RecipeCreatePage implements OnInit {
       control: this.recipeForm.controls[ingredientName]
     });
 
-    /* setTimeout(() => {
+    setTimeout(() => {
 			this.focusInput(ingredientName);
-		}, 100); */
+		}, 100);
   }
 
   initStepControls() {
@@ -138,10 +138,11 @@ export class RecipeCreatePage implements OnInit {
 
   
 
-  /* 	focusInput(id) {
-		document.getElementById(id).setFocus();
+  	focusInput(id) {
+    const doc: any = document.getElementById(id);
+    doc.setFocus();
 	}
- */
+
 
   addStepControl() {
     this.stepCount++;
