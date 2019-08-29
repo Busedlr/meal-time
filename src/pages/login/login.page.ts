@@ -27,10 +27,10 @@ export class LoginPage implements OnInit {
 	initForm() {
 		this.userForm = this.formBuilder.group({
 			email: [
-				'we@we.com',
+				'',
 				Validators.compose([Validators.email, Validators.required])
 			],
-			password: ['asasasas', Validators.required]
+			password: ['', Validators.required]
 		});
 	}
 

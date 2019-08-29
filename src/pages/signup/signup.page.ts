@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
+
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { UserDataService } from '../../services/user-data.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-signup',
@@ -18,7 +21,8 @@ export class SignupPage implements OnInit {
 
 	constructor(
 		public formBuilder: FormBuilder,
-		public userService: UserDataService
+		public userService: UserDataService,
+		public router: Router
 	) {
 		this.initForm();
 	}
@@ -33,37 +37,30 @@ export class SignupPage implements OnInit {
 		});
 	}
 
-	register() {
-		console.log('form', this.userForm)
-		const email = this.userForm.controls.email.value;
-		const name = this.userForm.controls.username.value;
-		const password = this.userForm.controls.password.value;
-		/* const controls = this.userForm.controls;
-		console.log('controls', controls) */
+	registerUser() {
 		firebase
 			.auth()
-			.createUserWithEmailAndPassword(email, password)
+			.createUserWithEmailAndPassword(
+				this.userForm.controls.email.value,
+				this.userForm.controls.password.value
+			)
 			.then(result => {
-				this.saveUser(result.user, name);
-				this.findLoggedInUser();
+				this.saveUser(result.user, this.userForm.controls.username.value);
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	}
 
-	saveUser(user, name) {
+	saveUser(user, username) {
 		const userData = {
 			email: user.email,
-			userName: name
-    };
-    
-    const uid = user.uid
-    this.userService.saveUser(uid, userData).then(() => {});
-    //feedback to user will be added here
-	}
-
-	findLoggedInUser() {
-		this.userService.getLoggedInUser();
+			username: username
+		};
+		const uid = user.uid;
+		this.userService.saveUser(uid, userData).then(() => {
+			this.router.navigate(["/home"]);
+		});
+		// feedback to user will be added here
 	}
 }
