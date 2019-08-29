@@ -39,8 +39,6 @@ export class RecipeCreatePage implements OnInit {
   getUser() {
     this.activatedRoute.queryParams.subscribe(res => {
       this.user = res;
-      console.log("user in create recipe page", this.user);
-      console.log("user id in create recipe page", this.user.id);
     });
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { RecipeDataService } from "../../services/recipe-data.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: "app-recipe-list",
