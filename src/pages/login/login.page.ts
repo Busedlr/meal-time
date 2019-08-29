@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
 			.auth()
 			.signInWithEmailAndPassword(email, password)
 			.then(() => {
-				this.userService.getLoggedInUser();
+				/* this.userService.getLoggedInUser(); */
 			})
 			.catch(error => {
 				console.log(error);
