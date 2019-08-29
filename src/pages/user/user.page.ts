@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserDataService } from "../../services/user-data.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-user",
@@ -8,17 +8,23 @@ import { Router } from "@angular/router";
   styleUrls: ["./user.page.scss"]
 })
 export class UserPage implements OnInit {
+  user: any;
   file: any;
   imageValid = false;
-  user: any;
+  
 
-  constructor(public userService: UserDataService, public router: Router) {
-    this.userService.userDetected.subscribe(doc => {
-      this.user = doc;
-    });
+  constructor(public userService: UserDataService, public router: Router, public activatedRoute: ActivatedRoute) {
+   this.getUser();
   }
 
   ngOnInit() {}
+
+  getUser(){
+    this.activatedRoute.queryParams.subscribe((res) => {
+      this.user = res;
+      console.log("user in users page", this.user)
+    })
+  }
 
   resetInput(inputId) {
     const fileInput = document.getElementById(inputId) as HTMLInputElement;
@@ -38,10 +44,17 @@ export class UserPage implements OnInit {
   }
 
   saveProfileImage() {
-    this.userService.addProfileImage(this.file);
+    const path = 'user_images/' + this.user.id;
+    this.userService.addProfileImage(path, this.file).then(() => {
+      //show the profile photo there
+    })
   }
 
   goToRecipeCreate() {
-    this.router.navigate(["/recipe-create"]);
+    this.router.navigate(["/recipe-create"], {queryParams: this.user});
+  }
+
+  goToRecipeList() {
+    this.router.navigate(["/recipe-list"]);
   }
 }

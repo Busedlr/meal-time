@@ -3,6 +3,7 @@ import { UserDataService } from 'src/services/user-data.service';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-home',
@@ -12,7 +13,7 @@ import 'firebase/auth';
 export class HomePage {
 	user: any;
 
-	constructor(public userService: UserDataService) {
+	constructor(public userService: UserDataService, public router: Router) {
 		this.onAuthChange();
 	}
 
@@ -25,5 +26,9 @@ export class HomePage {
 				});
 			}
 		});
+	}
+
+	goToUserPage() {
+this.router.navigate(['/user'], {queryParams: this.user})
 	}
 }

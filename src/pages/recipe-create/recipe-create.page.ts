@@ -7,12 +7,15 @@ import {
   FormControl
 } from "@angular/forms";
 
+import { ActivatedRoute } from "@angular/router";
+
 @Component({
   selector: "app-recipe-create",
   templateUrl: "./recipe-create.page.html",
   styleUrls: ["./recipe-create.page.scss"]
 })
 export class RecipeCreatePage implements OnInit {
+  user: any;
   recipeForm: FormGroup;
   ingredientCount = 1;
   ingredientControls: any[] = [];
@@ -24,12 +27,22 @@ export class RecipeCreatePage implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public recipeService: RecipeDataService
+    public recipeService: RecipeDataService,
+    public activatedRoute: ActivatedRoute
   ) {
     this.initForm();
+    this.getUser();
   }
 
   ngOnInit() {}
+
+  getUser() {
+    this.activatedRoute.queryParams.subscribe(res => {
+      this.user = res;
+      console.log("user in create recipe page", this.user);
+      console.log("user id in create recipe page", this.user.id);
+    });
+  }
 
   initForm() {
     this.recipeForm = this.formBuilder.group({
@@ -52,7 +65,7 @@ export class RecipeCreatePage implements OnInit {
       servings: [8, Validators.required],
       prepTime: [15, Validators.required],
       cookingTime: [20, Validators.required],
-      step1: ["step 1", Validators.required],
+      step1: ["step 1", Validators.required]
     });
 
     this.initIngredientControls();
@@ -61,11 +74,12 @@ export class RecipeCreatePage implements OnInit {
   }
 
   saveRecipe() {
-    const recipeData = { ingredients: [], steps: [], path: ""};
+    let recipeData = { ingredients: [], steps: []};
 
     Object.keys(this.recipeForm.controls).forEach(key => {
       const value = this.recipeForm.controls[key].value;
-      recipeData.path = "recipe_images/" + this.recipeForm.controls.name.value;
+      recipeData['path'] = "recipe_images/" + this.recipeForm.controls.name.value;
+      recipeData['userId'] = this.user.id;
       if (key.includes("ingredient")) {
         recipeData.ingredients.push(value);
       } else if (key.includes("step")) {
@@ -75,12 +89,10 @@ export class RecipeCreatePage implements OnInit {
       }
     });
     this.recipeService.saveRecipe(recipeData).then(() => {
-      this.recipeService
-        .addRecipeImage(this.file, recipeData.path)
-        .then(() => {
-          this.initForm();
-          this.resetInput(this.recipeImageInput);
-        });
+      this.recipeService.addRecipeImage(this.file, recipeData['path']).then(() => {
+        this.initForm();
+        this.resetInput(this.recipeImageInput);
+      });
     });
   }
 
@@ -124,8 +136,8 @@ export class RecipeCreatePage implements OnInit {
     });
 
     setTimeout(() => {
-			this.focusInput(ingredientName);
-		}, 100);
+      this.focusInput(ingredientName);
+    }, 100);
   }
 
   initStepControls() {
@@ -136,13 +148,10 @@ export class RecipeCreatePage implements OnInit {
     });
   }
 
-  
-
-  	focusInput(id) {
+  focusInput(id) {
     const doc: any = document.getElementById(id);
     doc.setFocus();
-	}
-
+  }
 
   addStepControl() {
     this.stepCount++;
@@ -168,7 +177,4 @@ export class RecipeCreatePage implements OnInit {
     this.recipeForm.removeControl(control.name);
     this.stepControls.splice(index, 1);
   }
-
-
-  
 }
