@@ -53,4 +53,13 @@ export class UserDataService {
         console.log(error);
       });
   }
+
+  getProfileImage(userId) {
+    let path = 'user_images/' + userId
+    return this.storageRef.child(path).getDownloadURL().then((url) => {
+      return url
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../../services/user-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+
 @Component({
 	selector: 'app-user',
 	templateUrl: './user.page.html',
@@ -9,6 +12,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserPage implements OnInit {
 	user: any;
+	storageRef: any;
+	imageToSave: any = null;
 
 	constructor(
 		public userService: UserDataService,
@@ -21,8 +26,20 @@ export class UserPage implements OnInit {
 	ngOnInit() {}
 
 	getUser() {
-		this.activatedRoute.queryParams.subscribe(res => {
-			this.user = res;
+		firebase.auth().onAuthStateChanged(res => {
+			if (res) {
+				this.userService.getUser(res.uid).then(doc => {
+					this.user = doc.data();
+					this.user.id = doc.id;
+					this.getProfileImage();
+				});
+			}
+		});
+	}
+
+	getProfileImage() {
+		this.userService.getProfileImage(this.user.id).then(imageUrl => {
+			this.user.profileImageUrl = imageUrl;
 		});
 	}
 
@@ -38,15 +55,17 @@ export class UserPage implements OnInit {
 			(file.type === 'image/jpeg' || file.type === 'image/png') &&
 			file.size <= 5e6
 		) {
-			this.saveProfileImage(file);
+			this.imageToSave = file;
 		}
 	}
 
-	saveProfileImage(file) {
-		const path = 'user_images/' + this.user.id;
-		this.userService.addProfileImage(path, file).then(() => {
-      console.log('image saved')
-    });
+	saveProfileImage() {
+		if (this.imageToSave) {
+			const path = 'user_images/' + this.user.id;
+			this.userService.addProfileImage(path, this.imageToSave).then(() => {
+				this.getProfileImage();
+			});
+		}
 	}
 
 	goToRecipeCreate() {

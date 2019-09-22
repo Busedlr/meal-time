@@ -5,15 +5,16 @@
 </ion-header>
 
 <ion-content>
-  <label for="userImage" (click)="resetInput(userImageInput)"
-    >Add a profile photo</label
-  >
-  <input type="file" id="{{ userImageInput }}" (change)="selectFile($event)" />
+  <label for="userImage" (click)="resetInput('userImage')">Add a profile photo</label>
+  <input type="file" id="userImage" (change)="selectFile($event)" />
 
-  <ion-button [disabled]="!imageValid" (click)="saveProfileImage()"
-    >Save Image</ion-button
-  >
+  <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()">Save Image</ion-button>
 
   <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
   <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
+
+  <div class="img-container">
+    <img src="{{user?.profileImageUrl}}" alt="profile image">
+  </div>
+
 </ion-content>
