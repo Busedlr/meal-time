@@ -43,7 +43,8 @@ export class UserDataService {
   }
 
   addProfileImage(path, file) {
-    return this.storageRef.child(path)
+    return this.storageRef
+      .child(path)
       .put(file)
       .then(() => {
         console.log("profile photo is saved");
@@ -54,12 +55,41 @@ export class UserDataService {
       });
   }
 
+  addCoverImage(path, file) {
+    return this.storageRef
+      .child(path)
+      .put(file)
+      .then(() => {
+        console.log("cover photo is saved");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   getProfileImage(userId) {
-    let path = 'user_images/' + userId
-    return this.storageRef.child(path).getDownloadURL().then((url) => {
-      return url
-    }).catch((e) => {
-      console.log(e)
-    })
+    let path = "user_images/" + userId;
+    return this.storageRef
+      .child(path)
+      .getDownloadURL()
+      .then(url => {
+        return url;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  getCoverImage(userId) {
+    let path = "cover_images/" + userId;
+    return this.storageRef
+      .child(path)
+      .getDownloadURL()
+      .then(url => {
+        return url;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }

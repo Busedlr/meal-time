@@ -32,6 +32,7 @@ export class UserPage implements OnInit {
 					this.user = doc.data();
 					this.user.id = doc.id;
 					this.getProfileImage();
+					this.getCoverImage();
 				});
 			}
 		});
@@ -41,6 +42,12 @@ export class UserPage implements OnInit {
 		this.userService.getProfileImage(this.user.id).then(imageUrl => {
 			this.user.profileImageUrl = imageUrl;
 		});
+	}
+
+	getCoverImage() {
+		this.userService.getCoverImage(this.user.id).then(coverUrl => {
+			this.user.coverImageUrl = coverUrl;
+		})
 	}
 
 	resetInput(inputId) {
@@ -65,6 +72,15 @@ export class UserPage implements OnInit {
 			this.userService.addProfileImage(path, this.imageToSave).then(() => {
 				this.getProfileImage();
 			});
+		}
+	}
+
+	saveCoverImage() {
+		if(this.imageToSave) {
+			const path = 'cover_images/' + this.user.id;
+			this.userService.addCoverImage(path, this.imageToSave).then(() => {
+				this.getCoverImage();
+			})
 		}
 	}
 
