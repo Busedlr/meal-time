@@ -1,0 +1,59 @@
+.profile-container {
+  background-color: white;
+}
+
+.cover-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  img {
+    max-height: 450px;
+    height: auto;
+    width: 100%;
+  }
+}
+
+.profile-image {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  margin-top: 270px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 4;
+  img {
+    height: 100%;
+  }
+}
+
+.profile-info-container {
+  position: relative;
+  height: 280px;
+  width: 60%;
+  margin-top: -100px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+  background-color: white;
+  box-shadow: 2px 2px 8px #888888;
+}
+
+.profile-info {
+  text-align: center;
+  padding-top: 12%;
+}
+
+.menu {
+  position: relative;
+  margin-top: -40px;
+  z-index: 6;
+  width: 62%;
+  margin-left: 19%;
+}
+
+.edit-button {
+  position: relative;
+  bottom: 285px;
+  margin-left: 73%;
+  z-index: 8;
+}

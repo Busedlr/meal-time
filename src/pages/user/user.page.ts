@@ -20,12 +20,12 @@ export class UserPage implements OnInit {
 		public router: Router,
 		public activatedRoute: ActivatedRoute
 	) {
-		this.getUser();
+		/* this.getUser(); */
 	}
 
 	ngOnInit() {}
 
-	getUser() {
+	/* getUser() {
 		firebase.auth().onAuthStateChanged(res => {
 			if (res) {
 				this.userService.getUser(res.uid).then(doc => {
@@ -82,7 +82,7 @@ export class UserPage implements OnInit {
 				this.getCoverImage();
 			})
 		}
-	}
+	} */
 
 	goToRecipeCreate() {
 		this.router.navigate(['/recipe-create'], { queryParams: this.user });
