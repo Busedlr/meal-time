@@ -1,48 +1,95 @@
-import { Component, OnInit } from '@angular/core';
-import { UserDataService } from '../../services/user-data.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { UserDataService } from "../../services/user-data.service";
+import { Router, ActivatedRoute } from "@angular/router";
 
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 @Component({
-	selector: 'app-user',
-	templateUrl: './user.page.html',
-	styleUrls: ['./user.page.scss']
+  selector: "app-user",
+  templateUrl: "./user.page.html",
+  styleUrls: ["./user.page.scss"]
 })
 export class UserPage implements OnInit {
-	user: any;
-	storageRef: any;
-	imageToSave: any = null;
+  user: any;
+  storageRef: any;
+  userId: any;
+  imageToSave: any = null;
 
-	constructor(
-		public userService: UserDataService,
-		public router: Router,
-		public activatedRoute: ActivatedRoute
-	) {
-		this.getUser();
-	}
+  constructor(
+    public userService: UserDataService,
+    public router: Router,
+    public activatedRoute: ActivatedRoute
+  ) {
+    this.getUser();
+  }
 
-	ngOnInit() {}
+  ngOnInit() {}
 
-	getUser() {
-		firebase.auth().onAuthStateChanged(res => {
-			if (res) {
-				this.userService.getUser(res.uid).then(doc => {
-					this.user = doc.data();
-					this.user.id = doc.id;
-				});
-			}
-		});
-	}
+  getUser() {
+    firebase.auth().onAuthStateChanged(res => {
+      if (res) {
+        this.userService.getUser(res.uid).then(doc => {
+          this.user = doc.data();
+          this.user.id = doc.id;
+          this.getProfileImage();
+          this.getCoverImage();
+        });
+      }
+    });
+  }
 
+  saveProfileImage() {
+    if (this.imageToSave) {
+      const path = "user_images/" + this.user.id;
+      this.userService.addProfileImage(path, this.imageToSave).then(() => {
+        this.getProfileImage();
+      });
+    }
+  }
 
+  saveCoverImage() {
+    if (this.imageToSave) {
+      const path = "cover_images/" + this.user.id;
+      this.userService.addCoverImage(path, this.imageToSave).then(() => {
+        this.getCoverImage();
+      });
+    }
+  }
 
-	goToRecipeCreate() {
-		this.router.navigate(['/recipe-create'], { queryParams: this.user });
-	}
+  getProfileImage() {
+    this.userService.getProfileImage(this.user.id).then(imageUrl => {
+      this.user.profileImageUrl = imageUrl;
+    });
+  }
 
-	goToRecipeList() {
-		this.router.navigate(['/recipe-list']);
-	}
+  getCoverImage() {
+    this.userService.getCoverImage(this.user.id).then(coverUrl => {
+      this.user.coverImageUrl = coverUrl;
+    });
+  }
+
+  resetInput(inputId) {
+    const fileInput = document.getElementById(inputId) as HTMLInputElement;
+    fileInput.value = "";
+  }
+
+  selectFile(event) {
+    const file = event.srcElement.files[0];
+    if (
+      file &&
+      (file.type === "image/jpeg" || file.type === "image/png") &&
+      file.size <= 5e6
+    ) {
+      this.imageToSave = file;
+    }
+  }
+
+  goToRecipeCreate() {
+    this.router.navigate(["/recipe-create"], { queryParams: this.user });
+  }
+
+  goToRecipeList() {
+    this.router.navigate(["/recipe-list"]);
+  }
 }
