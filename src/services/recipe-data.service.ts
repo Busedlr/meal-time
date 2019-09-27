@@ -47,6 +47,7 @@ export class RecipeDataService {
 			.get()
 			.then(result => {
 				return result;
+				console.log("recipeservice result", result)
 			})
 			.catch(error => {
 				console.log(error);

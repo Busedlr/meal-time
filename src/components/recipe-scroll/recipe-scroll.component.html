@@ -1,0 +1,27 @@
+<!-- <ion-card-content scrollX="true" direction="x" no-padding>
+  <ion-card
+    *ngFor="let recipe of myRecipes"
+    class="recipe-card"
+    [routerLink]="'/recipe-detail/' + recipe.id"
+    routerDirection="forward"
+  >
+    <img class="recipe-image" src="{{ recipe.imageUrl }}" alt="recipe image" />
+    <div class="recipe-name">{{ recipe.name }}</div>
+  </ion-card>
+</ion-card-content>
+ -->
+
+<ion-slides [options]="slideOpts">
+  <ion-slide
+    *ngFor="let recipe of myRecipes"
+    [routerLink]="'/recipe-detail/' + recipe.id"
+    routerDirection="forward"
+  >
+    <span>
+      <img src="{{ recipe.imageUrl }}" alt="recipe image" />
+      <div class="recipe-name">{{ recipe.name }}</div>
+    </span>
+  </ion-slide>
+</ion-slides>
+
+

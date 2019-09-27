@@ -7,7 +7,6 @@ import { RecipeDataService } from "../../services/recipe-data.service";
   styleUrls: ["./recipe-list.page.scss"]
 })
 export class RecipeListPage implements OnInit {
-  db: any;
   recipes: any = [];
   imageUrl: any;
 
