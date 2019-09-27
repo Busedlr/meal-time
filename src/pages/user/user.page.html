@@ -8,54 +8,52 @@
   <app-header></app-header>
 </ion-header>
 <ion-content>
-  <!-- <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
-  <ion-button color="primary" (click)="goToRecipeList()">list</ion-button> -->
-
-  <div class="profile-container">
-    <div class="cover-image">
-      <img src="{{ user?.coverImageUrl }}" alt="cover image" />
-    </div>
-    <div class="profile-image">
-      <img src="{{ user?.profileImageUrl }}" alt="profile image" />
-    </div>
-
-    <ion-card class="profile-info-container">
-      <div class="profile-info">
-        <ion-card-header>
-          <ion-card-subtitle>Recipe Master</ion-card-subtitle>
-          <ion-card-title>Buttpie and Tornado</ion-card-title>
-        </ion-card-header>
-
-        <ion-card-content>
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit
-          clean.
-        </ion-card-content>
-      </div>
-    </ion-card>
-
-    <ion-button class="edit-button" color="secondary" fill="outline">
-      Edit
-      <ion-icon slot="end" name="create"></ion-icon>
-    </ion-button>
+  <div class="cover-image">
+    <img src="{{ user?.coverImageUrl }}" alt="cover image" />
+  </div>
+  <div class="profile-image">
+    <img src="{{ user?.profileImageUrl }}" alt="profile image" />
   </div>
 
-  <ion-grid class="menu">
+  <ion-card class="profile-info-container">
+    <div class="profile-info">
+      <ion-card-header>
+        <ion-card-subtitle>Recipe Master</ion-card-subtitle>
+        <ion-card-title>Buttpie and Tornado</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Keep close to Nature's heart... and break clear away, once in awhile,
+        and climb a mountain or spend a week in the woods. Wash your spirit
+        clean.
+      </ion-card-content>
+
+      <ion-button class="edit-button" color="secondary" fill="outline">
+        Edit
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card>
+
+  <ion-grid no-padding class="menu">
     <ion-row>
-      <ion-col>
+      <ion-col size-xs="12" size-sm="6" size-lg="3">
         <ion-button color="light" expand="full">Saved Recipes</ion-button>
       </ion-col>
-      <ion-col>
+      <ion-col size-xs="12" size-sm="6" size-lg="3">
         <ion-button color="light" expand="full">Collections</ion-button>
       </ion-col>
-      <ion-col>
+      <ion-col size-xs="12" size-sm="6" size-lg="3">
         <ion-button color="light" expand="full">My Recipes</ion-button>
       </ion-col>
-      <ion-col>
+      <ion-col size-xs="12" size-sm="6" size-lg="3">
         <ion-button color="light" expand="full">Overview</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
+  <ion-button color="primary" (click)="goToRecipeList()">list</ion-button> -->
 
   <app-recipe-scroll></app-recipe-scroll>
 </ion-content>

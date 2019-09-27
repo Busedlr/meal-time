@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { RecipeDataService } from "src/services/recipe-data.service";
+import { IonSlides } from "@ionic/angular";
 
 @Component({
   selector: "app-recipe-scroll",
@@ -7,6 +8,7 @@ import { RecipeDataService } from "src/services/recipe-data.service";
   styleUrls: ["./recipe-scroll.component.scss"]
 })
 export class RecipeScrollComponent implements OnInit {
+  @ViewChild("slides", { static: false }) slides: IonSlides;
   myRecipes: any = [];
 
   constructor(public recipeService: RecipeDataService) {
@@ -16,12 +18,10 @@ export class RecipeScrollComponent implements OnInit {
   ngOnInit() {}
 
   getRecipes() {
-    console.log("resipe scroll works")
+    console.log("resipe scroll works");
     this.recipeService.getRecipes().then(result => {
       result.docs.forEach(doc => {
-        console.log("doc", doc)
         let recipe = doc.data();
-        console.log("recipe", recipe)
         recipe.id = doc.id;
         this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
           recipe.imageUrl = url;
@@ -39,7 +39,25 @@ export class RecipeScrollComponent implements OnInit {
       stretch: 0,
       depth: 100,
       modifier: 1,
-      slideShadows: true,
+      slideShadows: true
     }
+  };
+
+  // merge these 2 functions into one
+  next() {
+    this.slides.getActiveIndex().then((res) => {
+      console.log(res)
+      this.slides.slideTo(res+2);
+    })
   }
+
+  prev() {
+    this.slides.getActiveIndex().then((res) => {
+      console.log(res)
+      this.slides.slideTo(res-2);
+    })
+  }
+
+  
+
 }
