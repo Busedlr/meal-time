@@ -38,22 +38,33 @@
   <ion-grid no-padding class="menu">
     <ion-row>
       <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full">Saved Recipes</ion-button>
+        <ion-button color="light" expand="full" (click)="changeSegment('savedRecipes')">Saved Recipes</ion-button>
       </ion-col>
       <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full">Collections</ion-button>
+        <ion-button color="light" expand="full" (click)="changeSegment('collections')">Collections</ion-button>
       </ion-col>
       <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full">My Recipes</ion-button>
+        <ion-button color="light" expand="full" (click)="changeSegment('myRecipes')">My Recipes</ion-button>
       </ion-col>
       <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full">Overview</ion-button>
+        <ion-button color="light" expand="full" (click)="changeSegment('overview')">Overview</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 
+  <!--   <label for="userImage" (click)="resetInput('userImage')">Add a profile photo</label>
+<input type="file" id="userImage" (change)="selectFile($event)" />
+
+<label for="coverImage" (click)="resetInput('coverImage')" >add a cover photo</label>
+<input type="file" id="coverImage" (change)="selectFile($event)" >
+
+<ion-button [disabled]="!imageToSave" (click)="saveCoverImage()">Save cover Image</ion-button>
+<ion-button [disabled]="!imageToSave" (click)="saveProfileImage()">Save profile Image</ion-button> -->
+
   <!-- <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
   <ion-button color="primary" (click)="goToRecipeList()">list</ion-button> -->
 
-  <app-recipe-scroll></app-recipe-scroll>
+  <app-recipe-scroll *ngIf="segment === 'myRecipes'" [recipes]='myRecipes'></app-recipe-scroll>
+  
+  <app-recipe-scroll *ngIf="segment === 'overview'" [recipes]='allRecipes'></app-recipe-scroll>
 </ion-content>

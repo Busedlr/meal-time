@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import { RecipeDataService } from "src/services/recipe-data.service";
 
 @Component({
   selector: "app-user",
@@ -15,11 +16,15 @@ export class UserPage implements OnInit {
   storageRef: any;
   userId: any;
   imageToSave: any = null;
+  myRecipes: any = [];
+  allRecipes: any = [];
+  segment: any;
 
   constructor(
     public userService: UserDataService,
     public router: Router,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    public recipeService: RecipeDataService
   ) {
     this.getUser();
   }
@@ -32,10 +37,38 @@ export class UserPage implements OnInit {
         this.userService.getUser(res.uid).then(doc => {
           this.user = doc.data();
           this.user.id = doc.id;
+          this.getMyRecipes();
+          this.getAllRecipes();
           this.getProfileImage();
           this.getCoverImage();
         });
       }
+    });
+  }
+
+  getMyRecipes() {
+    this.recipeService.getMyRecipes(this.user.id).then(result => {
+      result.docs.forEach(doc => {
+        let recipe = doc.data();
+        recipe.id = doc.id;
+        this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
+          recipe.imageUrl = url;
+          this.myRecipes.push(recipe);
+        });
+      });
+    });
+  }
+
+  getAllRecipes() {
+    this.recipeService.getAllRecipes().then(result => {
+      result.docs.forEach(doc => {
+        let recipe = doc.data();
+        recipe.id = doc.id;
+        this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
+          recipe.imageUrl = url;
+          this.allRecipes.push(recipe);
+        });
+      });
     });
   }
 
@@ -91,5 +124,9 @@ export class UserPage implements OnInit {
 
   goToRecipeList() {
     this.router.navigate(["/recipe-list"]);
+  }
+
+  changeSegment(seg) {
+    this.segment = seg;
   }
 }

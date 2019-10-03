@@ -10,10 +10,10 @@
   </ion-card>
 </ion-card-content>
  -->
-
+ <h1 class="recipeSlideTitle">My Recipes</h1>
 <ion-slides #slides [options]="slideOpts">
   <ion-slide
-    *ngFor="let recipe of myRecipes"
+    *ngFor="let recipe of recipes"
     [routerLink]="'/recipe-detail/' + recipe.id"
     routerDirection="forward"
   >
@@ -23,23 +23,27 @@
     </div>
   </ion-slide>
 </ion-slides>
-<button
+
+<ion-icon
+  ios="ios-arrow-dropleft-circle"
+  md="md-arrow-dropleft-circle"
   type="submit"
   float-left
   ion-button
   color="primary"
   class="btnPrev"
   (click)="prev()"
->
-  Prev
-</button>
-<button
+  size="large"
+></ion-icon>
+
+<ion-icon
+  ios="ios-arrow-dropright-circle"
+  md="md-arrow-dropright-circle"
   type="submit"
   float-right
   ion-button
   color="primary"
   class="btnNext"
   (click)="next()"
->
-  Next
-</button>
+  size="large"
+></ion-icon>
