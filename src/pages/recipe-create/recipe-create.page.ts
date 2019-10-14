@@ -1,11 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { RecipeDataService } from "../../services/recipe-data.service";
+import { UserDataService } from 'src/services/user-data.service';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   FormControl
 } from "@angular/forms";
+
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 import { ActivatedRoute } from "@angular/router";
 
@@ -28,7 +32,8 @@ export class RecipeCreatePage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public recipeService: RecipeDataService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    public userService: UserDataService
   ) {
     this.initForm();
     this.getUser();
@@ -37,9 +42,24 @@ export class RecipeCreatePage implements OnInit {
   ngOnInit() {}
 
   getUser() {
-    this.activatedRoute.queryParams.subscribe(res => {
+    /* this.activatedRoute.queryParams.subscribe(res => {
+      console.log(res)
+      res.recipes = [];
       this.user = res;
-    });
+    }); */
+
+
+      firebase.auth().onAuthStateChanged(res => {
+        if (res) {
+          this.userService.getUser(res.uid).then(doc => {
+            this.user = doc.data();
+            this.user.id = doc.id;
+            this.user.myRecipes = [];
+            console.log(this.user)
+          });
+        }
+      });
+    
   }
 
   initForm() {
