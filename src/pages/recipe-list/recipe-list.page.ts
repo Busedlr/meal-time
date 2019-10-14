@@ -11,12 +11,12 @@ export class RecipeListPage implements OnInit {
   imageUrl: any;
 
   constructor(public recipeService: RecipeDataService) {
-    this.getRecipes();
+    /* this.getRecipes(); */
   }
 
   ngOnInit() {}
 
-  getRecipes() {
+  /* getRecipes() {
     this.recipeService.getRecipes().then(result => {
       result.docs.forEach(doc => {
         let recipe = doc.data();
@@ -27,5 +27,5 @@ export class RecipeListPage implements OnInit {
         });
       });
     });
-  }
+  } */
 }
