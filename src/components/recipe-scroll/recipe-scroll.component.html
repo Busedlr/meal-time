@@ -10,15 +10,16 @@
   </ion-card>
 </ion-card-content>
  -->
- <h1 class="recipeSlideTitle">My Recipes</h1>
+<h1 class="recipeSlideTitle">My Recipes</h1>
 <ion-slides #slides [options]="slideOpts">
-  <ion-slide
-    *ngFor="let recipe of recipes"
-    [routerLink]="'/recipe-detail/' + recipe.id"
-    routerDirection="forward"
-  >
+  <ion-slide *ngFor="let recipe of recipes">
     <div class="slide-content">
-      <img src="{{ recipe.imageUrl }}" alt="recipe image" />
+      <img
+        src="{{ recipe.imageUrl }}"
+        alt="recipe image"
+        [routerLink]="'/recipe-detail/' + recipe.id"
+        routerDirection="forward"
+      />
       <div>{{ recipe.name }}</div>
     </div>
   </ion-slide>
@@ -29,7 +30,6 @@
   md="md-arrow-dropleft-circle"
   type="submit"
   float-left
-  ion-button
   color="primary"
   class="btnPrev"
   (click)="prev()"
@@ -41,7 +41,6 @@
   md="md-arrow-dropright-circle"
   type="submit"
   float-right
-  ion-button
   color="primary"
   class="btnNext"
   (click)="next()"

@@ -29,6 +29,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  //delete this later its temporary so the site doesnt crush
+  userSignIn() {
+
+  }
   userSignOut() {
     firebase
       .auth()

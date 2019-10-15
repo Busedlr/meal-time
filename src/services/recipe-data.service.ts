@@ -24,6 +24,7 @@ export class RecipeDataService {
       .add(recipeData)
       .then(doc => {
         console.log("document saved with id", doc.id);
+        return doc
       })
       .catch(error => {
         console.log(error);

@@ -92,4 +92,10 @@ export class UserDataService {
         console.log(error);
       });
   }
+
+  updateMyRecipes(user) {
+    this.usersRef.doc(user.id).update({
+      my_recipes: user.my_recipes
+    })
+  }
 }

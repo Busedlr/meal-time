@@ -1,8 +1,12 @@
-<div>
+<!-- <div>
   <ion-toolbar>
     <ion-buttons slot="secondary">
       <ion-button (click)="userSignOut()">
-        <ion-icon slot="icon-only" (click)="userSignOut()" name="contact"></ion-icon>
+        <ion-icon
+          slot="icon-only"
+          (click)="userSignOut()"
+          name="contact"
+        ></ion-icon>
       </ion-button>
       <ion-button>
         <ion-icon slot="icon-only" name="search"></ion-icon>
@@ -13,6 +17,18 @@
         <ion-icon slot="icon-only" name="more"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Hello {{ user ? user.username : "Guest" }} !</ion-title>
+    <ion-title>Hello {{ user ? user.username : "signIn" }} !</ion-title>
+  </ion-toolbar>
+</div> -->
+
+<div>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        Sign In
+        <ion-icon (click)="userSignOut()" name="contact"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Meal Time</ion-title>
   </ion-toolbar>
 </div>

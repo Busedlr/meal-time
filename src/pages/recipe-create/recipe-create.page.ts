@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { RecipeDataService } from "../../services/recipe-data.service";
-import { UserDataService } from 'src/services/user-data.service';
+import { UserDataService } from "src/services/user-data.service";
 import {
   FormBuilder,
   FormGroup,
@@ -8,8 +8,8 @@ import {
   FormControl
 } from "@angular/forms";
 
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import * as firebase from "firebase/app";
+import "firebase/auth";
 
 import { ActivatedRoute } from "@angular/router";
 
@@ -48,18 +48,14 @@ export class RecipeCreatePage implements OnInit {
       this.user = res;
     }); */
 
-
-      firebase.auth().onAuthStateChanged(res => {
-        if (res) {
-          this.userService.getUser(res.uid).then(doc => {
-            this.user = doc.data();
-            this.user.id = doc.id;
-            this.user.myRecipes = [];
-            console.log(this.user)
-          });
-        }
-      });
-    
+    firebase.auth().onAuthStateChanged(res => {
+      if (res) {
+        this.userService.getUser(res.uid).then(doc => {
+          this.user = doc.data();
+          this.user.id = doc.id;
+        });
+      }
+    });
   }
 
   initForm() {
@@ -92,12 +88,13 @@ export class RecipeCreatePage implements OnInit {
   }
 
   saveRecipe() {
-    let recipeData = { ingredients: [], steps: []};
+    let recipeData = { ingredients: [], steps: [] };
 
     Object.keys(this.recipeForm.controls).forEach(key => {
       const value = this.recipeForm.controls[key].value;
-      recipeData['path'] = "recipe_images/" + this.recipeForm.controls.name.value;
-      recipeData['userId'] = this.user.id;
+      recipeData["path"] =
+        "recipe_images/" + this.recipeForm.controls.name.value;
+      recipeData["userId"] = this.user.id;
       if (key.includes("ingredient")) {
         recipeData.ingredients.push(value);
       } else if (key.includes("step")) {
@@ -106,11 +103,20 @@ export class RecipeCreatePage implements OnInit {
         recipeData[key] = value;
       }
     });
-    this.recipeService.saveRecipe(recipeData).then(() => {
-      this.recipeService.addRecipeImage(this.file, recipeData['path']).then(() => {
-        this.initForm();
-        this.resetInput(this.recipeImageInput);
-      });
+    this.recipeService.saveRecipe(recipeData).then(doc => {
+      this.recipeService
+        .addRecipeImage(this.file, recipeData["path"])
+        .then(() => {
+          if (this.user.my_recipes) {
+            this.user.my_recipes.push(doc.id);
+          } else {
+            this.user.my_recipes = [];
+            this.user.my_recipes.push(doc.id);
+          }
+          this.userService.updateMyRecipes(this.user);
+          this.initForm();
+          this.resetInput(this.recipeImageInput);
+        });
     });
   }
 

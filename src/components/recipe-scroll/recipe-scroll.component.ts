@@ -38,4 +38,6 @@ export class RecipeScrollComponent implements OnInit {
       this.slides.slideTo(res - 2);
     });
   }
+
+  
 }
