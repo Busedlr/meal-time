@@ -1,27 +1,6 @@
-<!-- <div>
-  <ion-toolbar>
-    <ion-buttons slot="secondary">
-      <ion-button (click)="userSignOut()">
-        <ion-icon
-          slot="icon-only"
-          (click)="userSignOut()"
-          name="contact"
-        ></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button color="secondary">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Hello {{ user ? user.username : "signIn" }} !</ion-title>
-  </ion-toolbar>
-</div> -->
 
-<div>
+
+<!-- <div>
   <ion-toolbar>
     <ion-buttons slot="secondary">
       <ion-button (click)="toUserPage()" *ngIf="user; else noUser">
@@ -43,4 +22,28 @@
     </ion-buttons>
     <ion-title>Meal Time</ion-title>
   </ion-toolbar>
-</div>
+</div> -->
+
+<div>
+    <ion-toolbar>
+      <ion-buttons slot="secondary">
+        <ion-button (click)="toUserPage()" *ngIf="user">
+          <div>Hello {{ user.username }}</div>
+        </ion-button>
+        <ion-button (click)="logOut()" *ngIf="user">
+          Log Out
+          <ion-icon name="contact"></ion-icon>
+        </ion-button>
+        
+          <ion-button (click)="toSignUp()" *ngIf="user == null">
+            Create an account
+          </ion-button>
+          <ion-button (click)="toLogIn()" *ngIf="user == null">
+            Log In
+            <ion-icon name="contact"></ion-icon>
+          </ion-button>
+        
+      </ion-buttons>
+      <ion-title>Meal Time</ion-title>
+    </ion-toolbar>
+  </div>

@@ -39,16 +39,17 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    this.loginService.logOut().then (() => {
+    this.loginService.logOut().then(() => {
+      this.user = null;
       this.router.navigate(["/home"]);
-    })
+    });
   }
-  
+
   toSignUp() {
-    this.router.navigate(["/signup"])
+    this.router.navigate(["/signup"]);
   }
 
   toUserPage() {
-    this.router.navigate(["/user"])
+    this.router.navigate(["/user"]);
   }
 }

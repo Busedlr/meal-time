@@ -1,1 +1,25 @@
+.slide-content {
+  margin-left: 5px;
+  margin-right: 5px;
+  img {
+      height: 400px;
+      min-width: 100%;
+  }
+}
 
+ion-slide:hover {
+  cursor: pointer;
+}
+
+ion-slide {
+    min-width: 100%;
+  background-color: purple;
+  float: left;
+}
+
+ion-slides {
+    margin-top: 20px;
+  width: 90%;
+  height: 450px;
+  position: relative;
+}
