@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { UserPage } from './user.page';
 import { UserProfileComponent } from 'src/components/user-profile/user-profile.component';
-import { HeaderComponent } from 'src/components/header/header.component';
 import { RecipeScrollComponent } from 'src/components/recipe-scroll/recipe-scroll.component';
+import { ComponentsModule } from 'src/components/components.module';
 
 const routes: Routes = [
   {
@@ -22,9 +22,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  entryComponents: [UserProfileComponent, HeaderComponent, RecipeScrollComponent],
-  declarations: [UserPage, UserProfileComponent, HeaderComponent, RecipeScrollComponent]
+  entryComponents: [UserProfileComponent, RecipeScrollComponent],
+  declarations: [UserPage, UserProfileComponent,RecipeScrollComponent]
 })
 export class UserPageModule {}

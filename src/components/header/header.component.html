@@ -24,10 +24,22 @@
 <div>
   <ion-toolbar>
     <ion-buttons slot="secondary">
-      <ion-button>
-        Sign In
-        <ion-icon (click)="userSignOut()" name="contact"></ion-icon>
+      <ion-button (click)="toUserPage()" *ngIf="user; else noUser">
+        <div>Hello {{ user.username }}</div>
       </ion-button>
+      <ion-button (click)="logOut()" *ngIf="user">
+        Log Out
+        <ion-icon name="contact"></ion-icon>
+      </ion-button>
+      <ng-template #noUser>
+        <ion-button (click)="toSignUp()">
+          Create an account
+        </ion-button>
+        <ion-button (click)="toLogIn()">
+          Log In
+          <ion-icon name="contact"></ion-icon>
+        </ion-button>
+      </ng-template>
     </ion-buttons>
     <ion-title>Meal Time</ion-title>
   </ion-toolbar>

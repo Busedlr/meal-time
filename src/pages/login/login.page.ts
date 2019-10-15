@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import * as firebase from "firebase/app";
+/* import * as firebase from "firebase/app";
 import "firebase/firestore";
-import "firebase/auth";
+import "firebase/auth"; */
 import { UserDataService } from "../../services/user-data.service";
 import { Router } from "@angular/router";
+import { LoginService } from "src/services/login.service";
 
 @Component({
   selector: "app-login",
@@ -16,9 +17,9 @@ export class LoginPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public userService: UserDataService,
-    private router: Router
+    private router: Router,
+    public loginService: LoginService
   ) {
-    /* this.getSignedInUser(); */
     this.initForm();
   }
 
@@ -31,30 +32,13 @@ export class LoginPage implements OnInit {
     });
   }
 
-  signIn() {
-    const email = this.userForm.controls.email.value;
-    const password = this.userForm.controls.password.value;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.router.navigate(['./home'])
-        /* this.userService.getLoggedInUser(); */
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  logIn() {
+    this.loginService.logIn(this.userForm).then(() => {
+      this.router.navigate(["./home"]);
+    });
   }
 
-  userSignOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        console.log("user signed out");
-      })
-      .catch(error => {
-        console.log(error);
-      });
+  logOut() {
+    this.loginService.logOut();
   }
 }

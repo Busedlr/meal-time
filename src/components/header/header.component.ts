@@ -3,6 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import { Router } from "@angular/router";
 import { UserDataService } from "src/services/user-data.service";
+import { LoginService } from "src/services/login.service";
 
 @Component({
   selector: "app-header",
@@ -12,7 +13,11 @@ import { UserDataService } from "src/services/user-data.service";
 export class HeaderComponent implements OnInit {
   user: any;
 
-  constructor(public router: Router, public userService: UserDataService) {
+  constructor(
+    public router: Router,
+    public userService: UserDataService,
+    public loginService: LoginService
+  ) {
     this.onAuthChange();
   }
 
@@ -29,20 +34,21 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  //delete this later its temporary so the site doesnt crush
-  userSignIn() {
-
+  toLogIn() {
+    this.router.navigate(["/login"]);
   }
-  userSignOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        this.router.navigate(["/home"]);
-        console.log("user signed out");
-      })
-      .catch(error => {
-        console.log(error);
-      });
+
+  logOut() {
+    this.loginService.logOut().then (() => {
+      this.router.navigate(["/home"]);
+    })
+  }
+  
+  toSignUp() {
+    this.router.navigate(["/signup"])
+  }
+
+  toUserPage() {
+    this.router.navigate(["/user"])
   }
 }

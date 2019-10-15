@@ -1,18 +1,7 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-  hellooooo
-  </div>
   <ion-button (click)="goToUserPage()">user</ion-button>
-  <ion-button [routerLink]="'/recipe-list'" routerDirection="forward">Recipe list</ion-button>
-  <ion-button [routerLink]="'/login'" routerDirection="forward">Login</ion-button>
-  <ion-button [routerLink]="'/signup'" routerDirection="forward">Signup</ion-button>
-
 </ion-content>
