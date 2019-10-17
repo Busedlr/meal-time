@@ -3,36 +3,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-slides #slides [options]="slideOpts">
-    <ion-slide *ngFor="let recipe of allRecipes">
-      <div class="slide-content">
-        <img
-          src="{{ recipe.imageUrl }}"
-          alt="recipe image"
-          [routerLink]="'/recipe-detail/' + recipe.id"
-          routerDirection="forward"
-        />
-        <div>{{ recipe.name }}</div>
-      </div>
-    </ion-slide>
-  </ion-slides>
+  <div class="main-container">
+    <ion-slides #slides [options]="slideOpts">
+      <ion-slide *ngFor="let recipe of allRecipes">
+    
+          <img src="{{ recipe.imageUrl }}" alt="recipe image" [routerLink]="'/recipe-detail/' + recipe.id"
+            routerDirection="forward" />
+                
+      </ion-slide>
+    </ion-slides>
 
-  <ion-searchbar showCancelButton="focus"></ion-searchbar>
+    <ion-searchbar showCancelButton="focus"></ion-searchbar>
 
-
-  <ion-card style="display: inline-block;" *ngFor="let recipe of allRecipes">
-    <ion-card-content>
-      <img
-        src="{{ recipe.imageUrl }}"
-        alt="recipe image"
-        [routerLink]="'/recipe-detail/' + recipe.id"
-        routerDirection="forward"
-      />
-    </ion-card-content>
-    <ion-card-header>
-      <ion-card-subtitle>Dinner</ion-card-subtitle>
-      <ion-card-title>{{ recipe.name }}</ion-card-title>
-    </ion-card-header>
-  </ion-card>
-
+    <div class="card-container">
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col *ngFor="let recipe of allRecipes" size="4">
+            <ion-card>
+              <ion-card-content>
+                <img src="{{ recipe.imageUrl }}" alt="recipe image" [routerLink]="'/recipe-detail/' + recipe.id"
+                  routerDirection="forward" />
+              </ion-card-content>
+              <ion-card-header>
+                <ion-card-subtitle>Dinner</ion-card-subtitle>
+                <ion-card-title>{{ recipe.name }}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
 </ion-content>
