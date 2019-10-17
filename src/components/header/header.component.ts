@@ -3,7 +3,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import { Router } from "@angular/router";
 import { UserDataService } from "src/services/user-data.service";
-import { LoginService } from "src/services/login.service";
+import { AuthService } from "src/services/auth.service";
 
 @Component({
   selector: "app-header",
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     public router: Router,
     public userService: UserDataService,
-    public loginService: LoginService
+    public authService: AuthService
   ) {
     this.onAuthChange();
   }
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    this.loginService.logOut().then(() => {
+    this.authService.logOut().then(() => {
       this.user = null;
       this.router.navigate(["/home"]);
     });

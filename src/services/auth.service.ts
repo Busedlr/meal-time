@@ -6,7 +6,7 @@ import "firebase/auth";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   constructor() { }
 

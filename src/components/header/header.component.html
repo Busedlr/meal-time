@@ -35,10 +35,10 @@
           <ion-icon name="contact"></ion-icon>
         </ion-button>
         
-          <ion-button (click)="toSignUp()" *ngIf="user == null">
+          <ion-button (click)="toSignUp()" *ngIf="!user">
             Create an account
           </ion-button>
-          <ion-button (click)="toLogIn()" *ngIf="user == null">
+          <ion-button (click)="toLogIn()" *ngIf="!user">
             Log In
             <ion-icon name="contact"></ion-icon>
           </ion-button>

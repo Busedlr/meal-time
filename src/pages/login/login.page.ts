@@ -5,7 +5,7 @@ import "firebase/firestore";
 import "firebase/auth"; */
 import { UserDataService } from "../../services/user-data.service";
 import { Router } from "@angular/router";
-import { LoginService } from "src/services/login.service";
+import { AuthService } from "src/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     public userService: UserDataService,
     private router: Router,
-    public loginService: LoginService
+    public authService: AuthService
   ) {
     this.initForm();
   }
@@ -33,12 +33,12 @@ export class LoginPage implements OnInit {
   }
 
   logIn() {
-    this.loginService.logIn(this.userForm).then(() => {
+    this.authService.logIn(this.userForm).then(() => {
       this.router.navigate(["./home"]);
     });
   }
 
   logOut() {
-    this.loginService.logOut();
+    this.authService.logOut();
   }
 }
