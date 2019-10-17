@@ -1,15 +1,15 @@
-<ion-header>
-  <app-header></app-header>
-</ion-header>
-
 <ion-content>
+    <app-header></app-header>
   <div class="main-container">
+
     <ion-slides #slides [options]="slideOpts">
       <ion-slide *ngFor="let recipe of allRecipes">
-    
-          <img src="{{ recipe.imageUrl }}" alt="recipe image" [routerLink]="'/recipe-detail/' + recipe.id"
-            routerDirection="forward" />
-                
+        <img
+          src="{{ recipe.imageUrl }}"
+          alt="recipe image"
+          [routerLink]="'/recipe-detail/' + recipe.id"
+          routerDirection="forward"
+        />
       </ion-slide>
     </ion-slides>
 
@@ -21,8 +21,12 @@
           <ion-col *ngFor="let recipe of allRecipes" size="4">
             <ion-card>
               <ion-card-content>
-                <img src="{{ recipe.imageUrl }}" alt="recipe image" [routerLink]="'/recipe-detail/' + recipe.id"
-                  routerDirection="forward" />
+                <img
+                  src="{{ recipe.imageUrl }}"
+                  alt="recipe image"
+                  [routerLink]="'/recipe-detail/' + recipe.id"
+                  routerDirection="forward"
+                />
               </ion-card-content>
               <ion-card-header>
                 <ion-card-subtitle>Dinner</ion-card-subtitle>

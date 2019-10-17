@@ -1,0 +1,9 @@
+.toolbar-container {
+  width: 70%;
+  margin-left: calc((100% - 70%) / 2);
+  --ion-toolbar-background: #fff;
+  box-shadow: 1px 2px #d7d8da;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}

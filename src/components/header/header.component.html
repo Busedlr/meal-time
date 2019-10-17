@@ -1,49 +1,22 @@
-
-
-<!-- <div>
+<div class="toolbar-container" >
   <ion-toolbar>
     <ion-buttons slot="secondary">
-      <ion-button (click)="toUserPage()" *ngIf="user; else noUser">
+      <ion-button (click)="toUserPage()" *ngIf="user">
         <div>Hello {{ user.username }}</div>
       </ion-button>
       <ion-button (click)="logOut()" *ngIf="user">
         Log Out
         <ion-icon name="contact"></ion-icon>
       </ion-button>
-      <ng-template #noUser>
-        <ion-button (click)="toSignUp()">
-          Create an account
-        </ion-button>
-        <ion-button (click)="toLogIn()">
-          Log In
-          <ion-icon name="contact"></ion-icon>
-        </ion-button>
-      </ng-template>
+
+      <ion-button (click)="toSignUp()" *ngIf="!user">
+        Create an account
+      </ion-button>
+      <ion-button (click)="toLogIn()" *ngIf="!user">
+        Log In
+        <ion-icon name="contact"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Meal Time</ion-title>
   </ion-toolbar>
-</div> -->
-
-<div>
-    <ion-toolbar>
-      <ion-buttons slot="secondary">
-        <ion-button (click)="toUserPage()" *ngIf="user">
-          <div>Hello {{ user.username }}</div>
-        </ion-button>
-        <ion-button (click)="logOut()" *ngIf="user">
-          Log Out
-          <ion-icon name="contact"></ion-icon>
-        </ion-button>
-        
-          <ion-button (click)="toSignUp()" *ngIf="!user">
-            Create an account
-          </ion-button>
-          <ion-button (click)="toLogIn()" *ngIf="!user">
-            Log In
-            <ion-icon name="contact"></ion-icon>
-          </ion-button>
-        
-      </ion-buttons>
-      <ion-title>Meal Time</ion-title>
-    </ion-toolbar>
-  </div>
+</div>
