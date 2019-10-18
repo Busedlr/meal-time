@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, HostListener } from "@angular/core";
 
 import { UserDataService } from "src/services/user-data.service";
 
@@ -15,9 +15,14 @@ import { IonSlides } from "@ionic/angular";
 })
 export class HomePage {
   @ViewChild("slides", { static: false }) slides: IonSlides;
+  @HostListener('window:click', ['$event'])
+  clickout() {
+		this.closeDropdown();
+	}
   user: any;
   allRecipes: any = [];
-  recipesMenu = false;
+  controlMenu : boolean;
+  showMenu : boolean;
 
   constructor(
     public userService: UserDataService,
@@ -27,6 +32,25 @@ export class HomePage {
     this.onAuthChange();
     this.getRecipes();
   }
+
+  openDropdown(ev) {
+    this.showMenu = !this.showMenu;
+    this.controlMenu = true;
+
+    if (!this.showMenu) {
+      ev.stopPropagation();
+      this.controlMenu = false;
+    }
+	}
+
+	closeDropdown() {
+    this.showMenu = false;
+
+    if (this.controlMenu) {
+      this.showMenu = true;
+      this.controlMenu = false;
+    }
+	}
 
   slideOpts = {
     slidesPerView: 1,
@@ -68,11 +92,7 @@ export class HomePage {
     this.router.navigate(["/user"], { queryParams: this.user });
   }
 
-  openRecipeMenu() {
-    this.recipesMenu = true;
-  }
-
-  filterVegeterian() {
-    console.log("vegeterian recipes 	");
+  filterRecipes(type) {
+    console.log(type + 'recipes')
   }
 }

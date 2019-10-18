@@ -27,3 +27,24 @@ ion-card img {
   height: 200px;
   object-fit: cover;
 }
+
+.fadeIn {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+  animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.dropdown-list {
+  position: absolute;
+  z-index: 9;
+}
