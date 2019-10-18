@@ -1,12 +1,12 @@
 ion-slide:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 ion-slide {
   height: 450px;
   img {
-   height: 100%;
-   width: 100%;
+    height: 100%;
+    width: 100%;
   }
 }
 
@@ -14,21 +14,16 @@ ion-slide {
   object-fit: cover;
 }
 
-
 ion-searchbar {
-	-webkit-padding-start: 0;
-	-webkit-padding-end: 0;
+  -webkit-padding-start: 0;
+  -webkit-padding-end: 0;
 }
 
 .card-container {
-	margin: 0 -15px;
+  margin: 0 -15px;
 }
 
 ion-card img {
   height: 200px;
   object-fit: cover;
 }
-
-
-
-
