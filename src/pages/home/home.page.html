@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <app-header></app-header>
   <div class="main-container">
     <ion-slides #slides [options]="slideOpts">
