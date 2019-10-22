@@ -1,0 +1,30 @@
+.card-container {
+  margin: 0 -15px;
+}
+
+ion-card img {
+  height: 150px;
+  object-fit: cover;
+}
+
+ion-card-content {
+  height: 160px;
+}
+
+ion-card:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* .recipeImage {
+  img {
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+.recipeImage:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+ */

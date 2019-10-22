@@ -1,48 +1,37 @@
-<!-- <ion-card-content scrollX="true" direction="x" no-padding>
-  <ion-card
-    *ngFor="let recipe of myRecipes"
-    class="recipe-card"
-    [routerLink]="'/recipe-detail/' + recipe.id"
-    routerDirection="forward"
-  >
-    <img class="recipe-image" src="{{ recipe.imageUrl }}" alt="recipe image" />
-    <div class="recipe-name">{{ recipe.name }}</div>
-  </ion-card>
-</ion-card-content>
- -->
-<h1 class="recipeSlideTitle">My Recipes</h1>
-<ion-slides #slides [options]="slideOpts">
-  <ion-slide *ngFor="let recipe of recipes">
-    <div class="slide-content">
-      <img
-        src="{{ recipe.imageUrl }}"
-        alt="recipe image"
-        [routerLink]="'/recipe-detail/' + recipe.id"
-        routerDirection="forward"
-      />
-      <div>{{ recipe.name }}</div>
-    </div>
-  </ion-slide>
-</ion-slides>
 
-<ion-icon
-  ios="ios-arrow-dropleft-circle"
-  md="md-arrow-dropleft-circle"
-  type="submit"
-  float-left
-  color="primary"
-  class="btnPrev"
-  (click)="prev()"
-  size="large"
-></ion-icon>
+  <h1 class="recipeSlideTitle"> {{ recipeListName}} </h1>
+  <ion-slides #slides [options]="slideOpts">
+    <ion-slide *ngFor="let recipe of recipes">
+      <div class="slide-content">
+        <img
+          src="{{ recipe.imageUrl }}"
+          alt="recipe image"
+          [routerLink]="'/recipe-detail/' + recipe.id"
+          routerDirection="forward"
+        />
+        <div>{{ recipe.name }}</div>
+      </div>
+    </ion-slide>
+  </ion-slides>
 
-<ion-icon
-  ios="ios-arrow-dropright-circle"
-  md="md-arrow-dropright-circle"
-  type="submit"
-  float-right
-  color="primary"
-  class="btnNext"
-  (click)="next()"
-  size="large"
-></ion-icon>
+  <ion-icon
+    ios="ios-arrow-dropleft-circle"
+    md="md-arrow-dropleft-circle"
+    type="submit"
+    float-left
+    color="primary"
+    class="btnPrev"
+    (click)="prev()"
+    size="large"
+  ></ion-icon>
+
+  <ion-icon
+    ios="ios-arrow-dropright-circle"
+    md="md-arrow-dropright-circle"
+    type="submit"
+    float-right
+    color="primary"
+    class="btnNext"
+    (click)="next()"
+    size="large"
+  ></ion-icon>

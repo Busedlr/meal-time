@@ -10,6 +10,8 @@ export class RecipeScrollComponent implements OnInit {
   @ViewChild("slides", { static: false }) slides: IonSlides;
   user: any;
   @Input() recipes: [];
+  @Input() recipeListName: any;
+  
   constructor() {}
 
   ngOnInit() {}
@@ -38,6 +40,4 @@ export class RecipeScrollComponent implements OnInit {
       this.slides.slideTo(res - 2);
     });
   }
-
-  
 }

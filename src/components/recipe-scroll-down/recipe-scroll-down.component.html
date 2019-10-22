@@ -1,0 +1,40 @@
+<div class="card-container">
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col *ngFor="let recipe of recipes" size="3">
+        <ion-card>
+          <ion-card-content>
+            <img
+              src="{{ recipe.imageUrl }}"
+              alt="recipe image"
+              [routerLink]="'/recipe-detail/' + recipe.id"
+              routerDirection="forward"
+            />
+          </ion-card-content>
+          <ion-card-header>
+            <ion-card-subtitle>{{recipe.category}} Dinner</ion-card-subtitle>
+            <ion-card-title>{{ recipe.name }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
+<!-- <div class="card-container">
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col *ngFor="let recipe of recipes" size="3">
+        <div class="recipeImage">
+          <img
+            src="{{ recipe.imageUrl }}"
+            alt="recipe image"
+            [routerLink]="'/recipe-detail/' + recipe.id"
+            routerDirection="forward"
+          />
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+ -->

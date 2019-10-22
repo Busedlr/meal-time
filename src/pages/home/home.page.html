@@ -1,5 +1,5 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
-  <app-header></app-header>
+  <app-header *ngIf="showHeader"></app-header>
   <div class="main-container">
     <ion-slides #slides [options]="slideOpts">
       <ion-slide *ngFor="let recipe of allRecipes">
@@ -12,7 +12,6 @@
       </ion-slide>
     </ion-slides>
 
-
     <div>
       <ion-buttons>
         <ion-button (click)="openDropdown($event)">
@@ -21,8 +20,6 @@
         <ion-searchbar showCancelButton="focus"></ion-searchbar>
       </ion-buttons>
     </div>
-
-   
 
     <ion-list *ngIf="showMenu" class="fadeIn dropdown-list">
       <ion-item>
@@ -45,7 +42,7 @@
     <div class="card-container">
       <ion-grid no-padding>
         <ion-row>
-          <ion-col *ngFor="let recipe of allRecipes" size="4">
+          <ion-col *ngFor="let recipe of allRecipes" size="3">
             <ion-card>
               <ion-card-content>
                 <img

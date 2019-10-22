@@ -18,7 +18,8 @@ export class UserPage implements OnInit {
   imageToSave: any = null;
   myRecipes: any = [];
   allRecipes: any = [];
-  segment: any;
+  segment: any = "myRecipes"
+  showHeader: any = true;
 
   constructor(
     public userService: UserDataService,
@@ -128,5 +129,13 @@ export class UserPage implements OnInit {
 
   changeSegment(seg) {
     this.segment = seg;
+  }
+
+  onScroll(ev) {
+    if (ev.detail.deltaY > 0) {
+      this.showHeader = false;
+    } else if (ev.detail.deltaY < 0) {
+      this.showHeader = true;
+    }
   }
 }

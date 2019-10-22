@@ -54,4 +54,8 @@ export class HeaderComponent implements OnInit {
   toUserPage() {
     this.router.navigate(["/user"]);
   }
+
+  goToHome() {
+    this.router.navigate(["/home"]);
+  }
 }

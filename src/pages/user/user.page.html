@@ -1,66 +1,126 @@
+<ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
+  <app-header *ngIf="showHeader"></app-header>
+  <div class="main-container">
+    <img
+      class="cover-image"
+      src="{{ user?.coverImageUrl }}"
+      alt="cover image"
+    />
+    <img
+      class="profile-image"
+      src="{{ user?.profileImageUrl }}"
+      alt="profile image"
+    />
 
+    <ion-card class="profile-info-container">
+      <div class="profile-info">
+        <ion-card-header>
+          <ion-card-subtitle>Recipe Master</ion-card-subtitle>
+          <ion-card-title>Buttpie and Tornado</ion-card-title>
+        </ion-card-header>
 
-<ion-header>
-  <app-header></app-header>
-</ion-header>
-<ion-content>
-  <div class="cover-image">
-    <img src="{{ user?.coverImageUrl }}" alt="cover image" />
+        <ion-card-content>
+          Keep close to Nature's heart... and break clear away, once in awhile,
+          and climb a mountain or spend a week in the woods. Wash your spirit
+          clean.
+        </ion-card-content>
+
+        <ion-button class="edit-button" color="secondary" fill="outline">
+          Edit
+          <ion-icon slot="end" name="create"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card>
+
+    <ion-grid no-padding class="menu">
+      <ion-row>
+        <ion-col size-xs="12" size-sm="6" size-lg="3">
+          <ion-button
+            color="light"
+            expand="full"
+            (click)="changeSegment('savedRecipes')"
+            >Saved Recipes</ion-button
+          >
+        </ion-col>
+        <ion-col size-xs="12" size-sm="6" size-lg="3">
+          <ion-button
+            color="light"
+            expand="full"
+            (click)="changeSegment('collections')"
+            >Collections</ion-button
+          >
+        </ion-col>
+        <ion-col size-xs="12" size-sm="6" size-lg="3">
+          <ion-button
+            color="light"
+            expand="full"
+            (click)="changeSegment('myRecipes')"
+            >My Recipes</ion-button
+          >
+        </ion-col>
+        <ion-col size-xs="12" size-sm="6" size-lg="3">
+          <ion-button
+            color="light"
+            expand="full"
+            (click)="changeSegment('overview')"
+            >Overview</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!--  <label for="userImage" (click)="resetInput('userImage')"
+      >Add a profile photo</label
+    >
+    <input type="file" id="userImage" (change)="selectFile($event)" />
+
+    <label for="coverImage" (click)="resetInput('coverImage')"
+      >add a cover photo</label
+    >
+    <input type="file" id="coverImage" (change)="selectFile($event)" />
+
+    <ion-button [disabled]="!imageToSave" (click)="saveCoverImage()"
+      >Save cover Image</ion-button
+    >
+    <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
+      >Save profile Image</ion-button
+    >
+
+    <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
+    <ion-button color="primary" (click)="goToRecipeList()">list</ion-button> -->
+
+    <!-- <app-recipe-scroll
+      *ngIf="segment === 'myRecipes'"
+      [recipes]="myRecipes"
+      [recipeListName]="'My Recipes'"
+    ></app-recipe-scroll> -->
+
+    <app-recipe-scroll-down
+      *ngIf="segment === 'myRecipes'"
+      [recipes]="myRecipes"
+    >
+    </app-recipe-scroll-down>
+
+    <app-recipe-scroll-down
+      *ngIf="segment === 'savedRecipes'"
+      [recipes]="allRecipes"
+    >
+    </app-recipe-scroll-down>
+
+    
+
+    <app-recipe-scroll
+      *ngIf="segment === 'overview'"
+      [recipes]="allRecipes"
+      [recipeListName]="'All Recipes'"
+    ></app-recipe-scroll>
+
+    <app-recipe-scroll
+      *ngIf="segment === 'overview'"
+      [recipes]="myRecipes"
+      [recipeListName]="'My Recipes'"
+    ></app-recipe-scroll>
+
+    
   </div>
-  <div class="profile-image">
-    <img src="{{ user?.profileImageUrl }}" alt="profile image" />
-  </div>
-
-  <ion-card class="profile-info-container">
-    <div class="profile-info">
-      <ion-card-header>
-        <ion-card-subtitle>Recipe Master</ion-card-subtitle>
-        <ion-card-title>Buttpie and Tornado</ion-card-title>
-      </ion-card-header>
-
-      <ion-card-content>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit
-        clean.
-      </ion-card-content>
-
-      <ion-button class="edit-button" color="secondary" fill="outline">
-        Edit
-        <ion-icon slot="end" name="create"></ion-icon>
-      </ion-button>
-    </div>
-  </ion-card>
-
-  <ion-grid no-padding class="menu">
-    <ion-row>
-      <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full" (click)="changeSegment('savedRecipes')">Saved Recipes</ion-button>
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full" (click)="changeSegment('collections')">Collections</ion-button>
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full" (click)="changeSegment('myRecipes')">My Recipes</ion-button>
-      </ion-col>
-      <ion-col size-xs="12" size-sm="6" size-lg="3">
-        <ion-button color="light" expand="full" (click)="changeSegment('overview')">Overview</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-    <label for="userImage" (click)="resetInput('userImage')">Add a profile photo</label>
-<input type="file" id="userImage" (change)="selectFile($event)" />
-
-<label for="coverImage" (click)="resetInput('coverImage')" >add a cover photo</label>
-<input type="file" id="coverImage" (change)="selectFile($event)" >
-
-<ion-button [disabled]="!imageToSave" (click)="saveCoverImage()">Save cover Image</ion-button>
-<ion-button [disabled]="!imageToSave" (click)="saveProfileImage()">Save profile Image</ion-button>
-
-  <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
-  <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
-
-  <app-recipe-scroll *ngIf="segment === 'myRecipes'" [recipes]='myRecipes'></app-recipe-scroll>
-  
-  <app-recipe-scroll *ngIf="segment === 'overview'" [recipes]='allRecipes'></app-recipe-scroll>
 </ion-content>
