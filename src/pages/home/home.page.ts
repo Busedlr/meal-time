@@ -15,14 +15,21 @@ import { IonSlides } from "@ionic/angular";
 })
 export class HomePage {
   @ViewChild("slides", { static: false }) slides: IonSlides;
-  @HostListener('window:click', ['$event'])
+
+  @HostListener("window:click", ["$event"])
   clickout() {
-		this.closeDropdown();
-	}
+    this.closeDropdown();
+  }
+
+  @HostListener("window:scroll", ["$event"])
+   onWindowsScroll() {
+    console.log("scroll works");
+  }
+
   user: any;
   allRecipes: any = [];
-  controlMenu : boolean;
-  showMenu : boolean;
+  controlMenu: boolean;
+  showMenu: boolean;
 
   constructor(
     public userService: UserDataService,
@@ -41,16 +48,16 @@ export class HomePage {
       ev.stopPropagation();
       this.controlMenu = false;
     }
-	}
+  }
 
-	closeDropdown() {
+  closeDropdown() {
     this.showMenu = false;
 
     if (this.controlMenu) {
       this.showMenu = true;
       this.controlMenu = false;
     }
-	}
+  }
 
   slideOpts = {
     slidesPerView: 1,
@@ -93,6 +100,6 @@ export class HomePage {
   }
 
   filterRecipes(type) {
-    console.log(type + 'recipes')
+    console.log(type + "recipes");
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener, HostBinding } from "@angular/core";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import { Router } from "@angular/router";
@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+ 
 
   onAuthChange() {
     firebase.auth().onAuthStateChanged(res => {
