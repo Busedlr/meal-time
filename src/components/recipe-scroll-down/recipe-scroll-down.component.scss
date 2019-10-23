@@ -7,14 +7,37 @@ ion-card img {
   object-fit: cover;
 }
 
+ion-card img:hover {
+  height: 120px;
+  object-fit: cover;
+  opacity: 0.6;
+  ion-card-subtitle {
+    opacity: 1;
+  }
+}
+
 ion-card-content {
-  height: 160px;
+  height: 130px;
+}
+
+ion-card-subtitle {
+  opacity: 0;
 }
 
 ion-card:hover {
-  opacity: 0.6;
   cursor: pointer;
+  img {
+    height: 120px;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+  ion-card-subtitle {
+    opacity: 1;
+  }
 }
+
+
+
 
 /* .recipeImage {
   img {

@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { UserDataService } from "../../services/user-data.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ModalController } from "@ionic/angular";
 
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import { RecipeDataService } from "src/services/recipe-data.service";
+import { EditProfileModalPage } from "src/modals/edit-profile-modal/edit-profile-modal.page";
 
 @Component({
   selector: "app-user",
@@ -18,14 +20,15 @@ export class UserPage implements OnInit {
   imageToSave: any = null;
   myRecipes: any = [];
   allRecipes: any = [];
-  segment: any = "myRecipes"
+  segment: any = "myRecipes";
   showHeader: any = true;
 
   constructor(
     public userService: UserDataService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public recipeService: RecipeDataService
+    public recipeService: RecipeDataService,
+    public modalController: ModalController
   ) {
     this.getUser();
   }
@@ -137,5 +140,12 @@ export class UserPage implements OnInit {
     } else if (ev.detail.deltaY < 0) {
       this.showHeader = true;
     }
+  }
+
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: EditProfileModalPage
+    });
+    return await modal.present();
   }
 }

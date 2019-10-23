@@ -25,7 +25,7 @@
           clean.
         </ion-card-content>
 
-        <ion-button class="edit-button" color="secondary" fill="outline">
+        <ion-button (click)="openModal()" class="edit-button" color="secondary" fill="outline">
           Edit
           <ion-icon slot="end" name="create"></ion-icon>
         </ion-button>
@@ -89,11 +89,7 @@
     <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
     <ion-button color="primary" (click)="goToRecipeList()">list</ion-button> -->
 
-    <!-- <app-recipe-scroll
-      *ngIf="segment === 'myRecipes'"
-      [recipes]="myRecipes"
-      [recipeListName]="'My Recipes'"
-    ></app-recipe-scroll> -->
+    
 
     <app-recipe-scroll-down
       *ngIf="segment === 'myRecipes'"

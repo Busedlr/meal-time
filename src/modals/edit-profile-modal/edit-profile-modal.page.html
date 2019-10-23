@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>edit-profile-modal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <label for="userImage" (click)="resetInput('userImage')"
+      >Add a profile photo</label
+    >
+    <input type="file" id="userImage" (change)="selectFile($event)" />
+
+    <label for="coverImage" (click)="resetInput('coverImage')"
+      >add a cover photo</label
+    >
+    <input type="file" id="coverImage" (change)="selectFile($event)" />
+
+    <ion-button [disabled]="!imageToSave" (click)="saveCoverImage()"
+      >Save cover Image</ion-button
+    >
+    <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
+      >Save profile Image</ion-button
+    >
+
+    <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
+    <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
+</ion-content>

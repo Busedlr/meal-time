@@ -10,6 +10,12 @@ const routes: Routes = [
   { path: 'login', loadChildren: '../pages/login/login.module#LoginPageModule' },
   { path: 'signup', loadChildren: '../pages/signup/signup.module#SignupPageModule' },
   { path: 'user', loadChildren: '../pages/user/user.module#UserPageModule' },
+  { path: 'modal', loadChildren: './modal/modal.module#ModalPageModule' },
+  { path: 'edit-profile-modal', loadChildren: './modals/edit-profile-modal/edit-profile-modal.module#EditProfileModalPageModule' },
+  { path: 'modal', loadChildren: './modals/modal/modal.module#ModalPageModule' },
+  { path: 'page', loadChildren: './src/modals/page/page.module#PagePageModule' },
+  { path: 'profile', loadChildren: './app/modals/profile/profile.module#ProfilePageModule' }
+
 ];
 
 @NgModule({

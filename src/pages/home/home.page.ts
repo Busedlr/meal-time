@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener } from "@angular/core";
+import { Component, ViewChild, HostListener, Input } from "@angular/core";
 
 import { UserDataService } from "src/services/user-data.service";
 
@@ -23,7 +23,6 @@ export class HomePage {
     this.getRecipes();
   }
   @ViewChild("slides", { static: false }) slides: IonSlides;
-
   user: any;
   allRecipes: any = [];
   controlMenu: boolean;
@@ -33,6 +32,11 @@ export class HomePage {
   slideOpts = {
     slidesPerView: 1,
     freeMode: false,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pager: true,
     coverflowEffect: {
       rotate: 50,
       stretch: 0,

@@ -1,7 +1,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <app-header *ngIf="showHeader"></app-header>
   <div class="main-container">
-    <ion-slides #slides [options]="slideOpts">
+    <ion-slides #slides [options]="slideOpts"  autoplayDisableOnInteraction = "false">
       <ion-slide *ngFor="let recipe of allRecipes">
         <img
           src="{{ recipe.imageUrl }}"
@@ -39,27 +39,6 @@
       </ion-item>
     </ion-list>
 
-    <div class="card-container">
-      <ion-grid no-padding>
-        <ion-row>
-          <ion-col *ngFor="let recipe of allRecipes" size="3">
-            <ion-card>
-              <ion-card-content>
-                <img
-                  src="{{ recipe.imageUrl }}"
-                  alt="recipe image"
-                  [routerLink]="'/recipe-detail/' + recipe.id"
-                  routerDirection="forward"
-                />
-              </ion-card-content>
-              <ion-card-header>
-                <ion-card-subtitle>Dinner</ion-card-subtitle>
-                <ion-card-title>{{ recipe.name }}</ion-card-title>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+    <app-recipe-scroll-down [recipes]="allRecipes"> </app-recipe-scroll-down>
   </div>
 </ion-content>

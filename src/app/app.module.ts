@@ -10,6 +10,8 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { EditProfileModalPageModule } from 'src/modals/edit-profile-modal/edit-profile-modal.module';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    EditProfileModalPageModule
   ],
   providers: [
     StatusBar,
