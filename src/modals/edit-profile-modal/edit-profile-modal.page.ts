@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NavParams, ModalController } from "@ionic/angular";
 import * as firebase from "firebase/app";
-import { UserDataService } from 'src/services/user-data.service';
+import { UserDataService } from "src/services/user-data.service";
 
 @Component({
   selector: "app-edit-profile-modal",
@@ -12,15 +12,16 @@ export class EditProfileModalPage implements OnInit {
   storageRef: any;
   user: any;
   imageToSave: any = null;
+  image:any;
 
   constructor(
     public navParams: NavParams,
     public modalController: ModalController,
-    public userService: UserDataService,
+    public userService: UserDataService
   ) {}
 
   ngOnInit() {
-    console.log(this.user)
+    console.log(this.user);
   }
 
   getProfileImage() {
@@ -35,24 +36,6 @@ export class EditProfileModalPage implements OnInit {
     });
   }
 
-  saveProfileImage() {
-    if (this.imageToSave) {
-      const path = "user_images/" + this.user.id;
-      this.userService.addProfileImage(path, this.imageToSave).then(() => {
-        this.getProfileImage();
-      });
-    }
-  }
-
-  saveCoverImage() {
-    if (this.imageToSave) {
-      const path = "cover_images/" + this.user.id;
-      this.userService.addCoverImage(path, this.imageToSave).then(() => {
-        this.getCoverImage();
-      });
-    }
-  }
-  
   resetInput(inputId) {
     const fileInput = document.getElementById(inputId) as HTMLInputElement;
     fileInput.value = "";
@@ -68,6 +51,29 @@ export class EditProfileModalPage implements OnInit {
       this.imageToSave = file;
     }
   }
+
+ 
+
+  saveProfileImage() {
+    if (this.imageToSave) {
+      const path = "user_images/" + this.user.id;
+      this.userService.addProfileImage(path, this.imageToSave).then(() => {
+        this.getProfileImage();
+      });
+    }
+  }
+
+  saveCoverImage() {
+    console.log(this.imageToSave)
+    /* if (this.imageToSave) {
+      const path = "cover_images/" + this.user.id;
+      this.userService.addCoverImage(path, this.imageToSave).then(() => {
+        this.getCoverImage();
+      });
+    } */
+  }
+
+  
 
   closeModal() {
     this.modalController.dismiss();

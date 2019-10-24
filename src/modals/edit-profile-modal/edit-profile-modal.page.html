@@ -59,13 +59,14 @@
     <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
     <ion-button color="danger" (click)="closeModal()">Close</ion-button>
   </ion-content> -->
+  
 
 <ion-content>
   <div class="main-container">
     <label for="coverImage" (click)="resetInput('coverImage')"
       ><img
         class="cover-image"
-        src="{{ user?.coverImageUrl }}"
+        src="{{imageToSave}}"
         alt="cover image"
       />
     </label>
@@ -76,6 +77,13 @@
       id="coverImage"
       (change)="selectFile($event)"
     />
+
+    <!-- <label for="userImage" (click)="resetInput('userImage')"
+      ><img
+        class="profile-image"
+        src="{{ user?.profileImageUrl }}"
+        alt="profile image"
+    /></label> -->
 
     <label for="userImage" (click)="resetInput('userImage')"
       ><img
@@ -91,7 +99,7 @@
       (change)="selectFile($event)"
     />
 
-    <ion-card class="profile-info-container">
+    <!-- <ion-card class="profile-info-container">
       <div class="profile-info">
         <ion-card-header>
           <ion-card-subtitle>Recipe Master</ion-card-subtitle>
@@ -102,7 +110,22 @@
           Keep close to Nature's heart... and break clear away, once in awhile,
         </ion-card-content>
       </div></ion-card
-    >
+    > -->
+
+    <ion-card class="profile-info-container">
+        <div class="profile-info">
+          <ion-card-header>
+           
+            <ion-card-subtitle>Recipe Master</ion-card-subtitle>
+            <ion-card-title>Buttpie and Tornado</ion-card-title>
+          </ion-card-header>
+  
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile,
+          </ion-card-content>
+        </div></ion-card
+      >
+
   </div>
 
   <ion-button
@@ -115,4 +138,5 @@
   <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
       >Save profile Image</ion-button
     >
+
 </ion-content>

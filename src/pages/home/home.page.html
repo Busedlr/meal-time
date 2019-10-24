@@ -1,7 +1,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <app-header *ngIf="showHeader"></app-header>
   <div class="main-container">
-    <ion-slides #slides [options]="slideOpts"  autoplayDisableOnInteraction = "false">
+    <ion-slides #slides [options]="slideOpts"  autoplayDisableOnInteraction="false">
       <ion-slide *ngFor="let recipe of allRecipes">
         <img
           src="{{ recipe.imageUrl }}"
