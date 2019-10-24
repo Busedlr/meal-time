@@ -144,7 +144,8 @@ export class UserPage implements OnInit {
 
   async openModal() {
     const modal = await this.modalController.create({
-      component: EditProfileModalPage
+      component: EditProfileModalPage,
+      
     });
     return await modal.present();
   }
