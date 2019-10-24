@@ -1,0 +1,42 @@
+.cover-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .profile-image {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    margin-top: -700px;
+    margin-left: calc(50% - 75px);
+    z-index: 4;
+    border-radius: 50%;
+  }
+  
+  
+  
+  .profile-info-container {
+    position: relative;
+    height: 200px;
+    width: 80%;
+    margin-top: -100px;
+    margin-left: calc(10%);
+    margin-right: calc(10%);
+    z-index: 2;
+    background-color: white;
+    box-shadow: 2px 2px 8px #888888;
+  }
+  
+  .profile-info {
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  .input {
+      position:relative;
+      opacity: 0;
+      top: -100px;
+  }
+
+  

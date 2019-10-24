@@ -31,6 +31,7 @@ export class UserPage implements OnInit {
     public modalController: ModalController
   ) {
     this.getUser();
+    console.log("user page recreated")
   }
 
   ngOnInit() {}
@@ -76,7 +77,7 @@ export class UserPage implements OnInit {
     });
   }
 
-  saveProfileImage() {
+  /* saveProfileImage() {
     if (this.imageToSave) {
       const path = "user_images/" + this.user.id;
       this.userService.addProfileImage(path, this.imageToSave).then(() => {
@@ -92,7 +93,7 @@ export class UserPage implements OnInit {
         this.getCoverImage();
       });
     }
-  }
+  } */
 
   getProfileImage() {
     this.userService.getProfileImage(this.user.id).then(imageUrl => {
@@ -106,7 +107,7 @@ export class UserPage implements OnInit {
     });
   }
 
-  resetInput(inputId) {
+  /* resetInput(inputId) {
     const fileInput = document.getElementById(inputId) as HTMLInputElement;
     fileInput.value = "";
   }
@@ -120,7 +121,7 @@ export class UserPage implements OnInit {
     ) {
       this.imageToSave = file;
     }
-  }
+  } */
 
   goToRecipeCreate() {
     this.router.navigate(["/recipe-create"], { queryParams: this.user });
@@ -145,6 +146,11 @@ export class UserPage implements OnInit {
   async openModal() {
     const modal = await this.modalController.create({
       component: EditProfileModalPage,
+      componentProps: { 
+        foo: 'hello',
+        bar: 'world',
+        user: this.user
+      }
       
     });
     return await modal.present();

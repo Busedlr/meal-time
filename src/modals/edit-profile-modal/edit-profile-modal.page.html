@@ -4,7 +4,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- <ion-content>
+
+  <img src="{{ user?.profileImageUrl }}" alt="profile image">
+  <div>
+    passed info is : {{ passedInfo }}
+  </div>
   <label for="userImage" (click)="resetInput('userImage')"
     >Add a profile photo</label
   >
@@ -24,4 +29,90 @@
 
   <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
   <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
+  <ion-button color="danger" (click)="closeModal()">Close</ion-button>
+</ion-content> -->
+
+<!-- <ion-content>
+
+    <img src="{{ user?.profileImageUrl }}" alt="profile image">
+    <div>
+      passed info is : {{ passedInfo }}
+    </div>
+    <label for="userImage" (click)="resetInput('userImage')"
+      >Add a profile photo</label
+    >
+    <input type="file" id="userImage" (change)="selectFile($event)" />
+  
+    <label for="coverImage" (click)="resetInput('coverImage')"
+      >add a cover photo</label
+    >
+    <input type="file" id="coverImage" (change)="selectFile($event)" />
+  
+    <ion-button [disabled]="!imageToSave" (click)="saveCoverImage()"
+      >Save cover Image</ion-button
+    >
+    <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
+      >Save profile Image</ion-button
+    >
+  
+    <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
+    <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
+    <ion-button color="danger" (click)="closeModal()">Close</ion-button>
+  </ion-content> -->
+
+<ion-content>
+  <div class="main-container">
+    <label for="coverImage" (click)="resetInput('coverImage')"
+      ><img
+        class="cover-image"
+        src="{{ user?.coverImageUrl }}"
+        alt="cover image"
+      />
+    </label>
+
+    <input
+      class="input"
+      type="file"
+      id="coverImage"
+      (change)="selectFile($event)"
+    />
+
+    <label for="userImage" (click)="resetInput('userImage')"
+      ><img
+        class="profile-image"
+        src="{{ user?.profileImageUrl }}"
+        alt="profile image"
+    /></label>
+
+    <input
+      class="input"
+      type="file"
+      id="userImage"
+      (change)="selectFile($event)"
+    />
+
+    <ion-card class="profile-info-container">
+      <div class="profile-info">
+        <ion-card-header>
+          <ion-card-subtitle>Recipe Master</ion-card-subtitle>
+          <ion-card-title>Buttpie and Tornado</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          Keep close to Nature's heart... and break clear away, once in awhile,
+        </ion-card-content>
+      </div></ion-card
+    >
+  </div>
+
+  <ion-button
+    class="saveButton"
+    [disabled]="!imageToSave"
+    (click)="saveCoverImage()"
+    >Save cover Image</ion-button
+  >
+
+  <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
+      >Save profile Image</ion-button
+    >
 </ion-content>
