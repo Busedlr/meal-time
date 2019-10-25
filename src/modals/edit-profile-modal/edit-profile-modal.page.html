@@ -63,27 +63,29 @@
 
 <ion-content>
   <div class="main-container">
-    <label for="coverImage" (click)="resetInput('coverImage')"
+<!--     <label for="coverImageInput" (click)="resetInput('coverImage')"
       ><img
+      id=""
         class="cover-image"
-        src="{{imageToSave}}"
+        src="{{user?.coverImageUrl}}"
         alt="cover image"
       />
-    </label>
+    </label> -->
+
+    <label for="coverImageInput" (click)="resetInput('coverImage')"
+    ><img
+    id="coverImage"
+      class="cover-image"
+      alt="cover image"
+    />
+  </label>
 
     <input
       class="input"
       type="file"
-      id="coverImage"
+      id="coverImageInput"
       (change)="selectFile($event)"
     />
-
-    <!-- <label for="userImage" (click)="resetInput('userImage')"
-      ><img
-        class="profile-image"
-        src="{{ user?.profileImageUrl }}"
-        alt="profile image"
-    /></label> -->
 
     <label for="userImage" (click)="resetInput('userImage')"
       ><img

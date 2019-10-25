@@ -49,6 +49,8 @@ export class EditProfileModalPage implements OnInit {
       file.size <= 5e6
     ) {
       this.imageToSave = file;
+      let coverImage = document.getElementById('coverImage') as HTMLImageElement;
+      coverImage.src = URL.createObjectURL(event.target.files[0]);
     }
   }
 
@@ -64,13 +66,12 @@ export class EditProfileModalPage implements OnInit {
   }
 
   saveCoverImage() {
-    console.log(this.imageToSave)
-    /* if (this.imageToSave) {
+    if (this.imageToSave) {
       const path = "cover_images/" + this.user.id;
       this.userService.addCoverImage(path, this.imageToSave).then(() => {
         this.getCoverImage();
       });
-    } */
+    }
   }
 
   
