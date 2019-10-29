@@ -80,11 +80,18 @@
     />
   </label>
 
-    <input
+    <!-- <input
       class="input"
       type="file"
       id="coverImageInput"
       (change)="selectCoverImage($event)"
+    /> -->
+
+    <input
+      class="input"
+      type="file"
+      id="coverImageInput"
+      (change)="selectImage($event,'cover')"
     />
 
     <label for="userImage" (click)="resetInput('userImage')"
@@ -94,11 +101,18 @@
         alt="profile image"
     /></label>
 
-    <input
+    <!-- <input
       class="input"
       type="file"
       id="userImage"
       (change)="selectProfileImage($event)"
+    /> -->
+
+    <input
+      class="input"
+      type="file"
+      id="userImage"
+      (change)="selectImage($event,'profile')"
     />
 
     <!-- <ion-card class="profile-info-container">
