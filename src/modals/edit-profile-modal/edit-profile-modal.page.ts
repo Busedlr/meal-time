@@ -11,9 +11,12 @@ import { UserDataService } from "src/services/user-data.service";
 export class EditProfileModalPage implements OnInit {
   storageRef: any;
   user: any;
+  profileImageToSave: any = null;
+  coverImageToSave: any = null;
   imageToSave: any = null;
-  image:any;
+  image: any;
   coverImage: any;
+  profileImage: any;
 
   constructor(
     public navParams: NavParams,
@@ -21,9 +24,13 @@ export class EditProfileModalPage implements OnInit {
     public userService: UserDataService
   ) {}
 
-  ngOnInit() {  
-    this.coverImage = document.getElementById('coverImage') as HTMLImageElement;
+  ngOnInit() {
+    this.coverImage = document.getElementById("coverImage") as HTMLImageElement;
     this.coverImage.src = this.user.coverImageUrl;
+    this.profileImage = document.getElementById(
+      "profileImage"
+    ) as HTMLImageElement;
+    this.profileImage.src = this.user.profileImageUrl;
   }
 
   getProfileImage() {
@@ -43,39 +50,67 @@ export class EditProfileModalPage implements OnInit {
     fileInput.value = "";
   }
 
-  selectFile(event) {
+  selectCoverImage(event) {
     const file = event.srcElement.files[0];
     if (
       file &&
       (file.type === "image/jpeg" || file.type === "image/png") &&
       file.size <= 5e6
     ) {
-      this.imageToSave = file;
+      this.coverImageToSave = file;
       this.coverImage.src = URL.createObjectURL(file);
     }
   }
 
- 
+  selectProfileImage(event) {
+    const file = event.srcElement.files[0];
+    if (
+      file &&
+      (file.type === "image/jpeg" || file.type === "image/png") &&
+      file.size <= 5e6
+    ) {
+      this.profileImageToSave = file;
+      this.profileImage.src = URL.createObjectURL(file);
+    }
+  }
 
-  saveProfileImage() {
-    if (this.imageToSave) {
+  saveChanges() {
+    if (this.profileImageToSave) {
       const path = "user_images/" + this.user.id;
-      this.userService.addProfileImage(path, this.imageToSave).then(() => {
-        this.getProfileImage();
+      this.userService
+        .addProfileImage(path, this.profileImageToSave)
+        .then(() => {
+          this.getProfileImage();
+        });
+    }
+    if (this.coverImageToSave) {
+      const path = "cover_images/" + this.user.id;
+      this.userService.addCoverImage(path, this.coverImageToSave).then(() => {
+        this.getCoverImage();
       });
+    }
+    this.closeModal();
+  }
+
+ /*  saveProfileImage() {
+    if (this.profileImageToSave) {
+      const path = "user_images/" + this.user.id;
+      this.userService
+        .addProfileImage(path, this.profileImageToSave)
+        .then(() => {
+          this.getProfileImage();
+        });
     }
   }
 
   saveCoverImage() {
-    if (this.imageToSave) {
+    if (this.coverImageToSave) {
       const path = "cover_images/" + this.user.id;
-      this.userService.addCoverImage(path, this.imageToSave).then(() => {
+      this.userService.addCoverImage(path, this.coverImageToSave).then(() => {
         this.getCoverImage();
       });
     }
-  }
-
-  
+  } */
 
   closeModal() {
     this.modalController.dismiss();

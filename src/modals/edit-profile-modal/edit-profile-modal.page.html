@@ -84,13 +84,13 @@
       class="input"
       type="file"
       id="coverImageInput"
-      (change)="selectFile($event)"
+      (change)="selectCoverImage($event)"
     />
 
     <label for="userImage" (click)="resetInput('userImage')"
       ><img
+      id="profileImage"
         class="profile-image"
-        src="{{ user?.profileImageUrl }}"
         alt="profile image"
     /></label>
 
@@ -98,7 +98,7 @@
       class="input"
       type="file"
       id="userImage"
-      (change)="selectFile($event)"
+      (change)="selectProfileImage($event)"
     />
 
     <!-- <ion-card class="profile-info-container">
@@ -130,7 +130,7 @@
 
   </div>
 
-  <ion-button
+  <!-- <ion-button
     class="saveButton"
     [disabled]="!imageToSave"
     (click)="saveCoverImage()"
@@ -139,6 +139,10 @@
 
   <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
       >Save profile Image</ion-button
-    >
+    > -->
+
+    <ion-button (click)="saveChanges()"
+    >Save</ion-button
+  >
 
 </ion-content>
