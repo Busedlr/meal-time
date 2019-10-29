@@ -1,8 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-/* import * as firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth"; */
 import { UserDataService } from "../../services/user-data.service";
 import { Router } from "@angular/router";
 import { AuthService } from "src/services/auth.service";

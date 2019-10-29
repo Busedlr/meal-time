@@ -55,7 +55,8 @@ export class SignupPage implements OnInit {
 	saveUser(user, username) {
 		const userData = {
 			email: user.email,
-			username: username
+			username: username,
+			rank: 'New Chef'
 		};
 		const uid = user.uid;
 		this.userService.saveUser(uid, userData).then(() => {

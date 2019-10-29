@@ -20,7 +20,7 @@ export class UserPage implements OnInit {
   imageToSave: any = null;
   myRecipes: any = [];
   allRecipes: any = [];
-  segment: any = "myRecipes";
+  segment: any = "overview";
   showHeader: any = true;
 
   constructor(
@@ -77,7 +77,7 @@ export class UserPage implements OnInit {
   }
 
   getProfileImage() {
-    this.userService.getImages(this.user.id, 'profile').then(imageUrl => {
+    this.userService.getImages(this.user.id, "profile").then(imageUrl => {
       if (imageUrl) {
         this.user.profileImageUrl = imageUrl;
       } else {
@@ -89,7 +89,7 @@ export class UserPage implements OnInit {
   }
 
   getCoverImage() {
-    this.userService.getImages(this.user.id, 'cover').then(coverUrl => {
+    this.userService.getImages(this.user.id, "cover").then(coverUrl => {
       if (coverUrl) {
         this.user.coverImageUrl = coverUrl;
       } else {
@@ -132,3 +132,5 @@ export class UserPage implements OnInit {
     return await modal.present();
   }
 }
+
+

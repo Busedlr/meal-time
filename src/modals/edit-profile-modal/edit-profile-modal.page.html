@@ -59,97 +59,55 @@
     <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
     <ion-button color="danger" (click)="closeModal()">Close</ion-button>
   </ion-content> -->
-  
 
 <ion-content>
   <div class="main-container">
-<!--     <label for="coverImageInput" (click)="resetInput('coverImage')"
-      ><img
-      id=""
-        class="cover-image"
-        src="{{user?.coverImageUrl}}"
-        alt="cover image"
-      />
-    </label> -->
-
     <label for="coverImageInput" (click)="resetInput('coverImage')"
-    ><img
-    id="coverImage"
-      class="cover-image"
-      alt="cover image"
-    />
-  </label>
-
-    <!-- <input
-      class="input"
-      type="file"
-      id="coverImageInput"
-      (change)="selectCoverImage($event)"
-    /> -->
+      ><img id="coverImage" class="cover-image" alt="cover image" />
+    </label>
 
     <input
       class="input"
       type="file"
       id="coverImageInput"
-      (change)="selectImage($event,'cover')"
+      (change)="selectImage($event, 'cover')"
     />
 
     <label for="userImage" (click)="resetInput('userImage')"
-      ><img
-      id="profileImage"
-        class="profile-image"
-        alt="profile image"
+      ><img id="profileImage" class="profile-image" alt="profile image"
     /></label>
-
-    <!-- <input
-      class="input"
-      type="file"
-      id="userImage"
-      (change)="selectProfileImage($event)"
-    /> -->
 
     <input
       class="input"
       type="file"
       id="userImage"
-      (change)="selectImage($event,'profile')"
+      (change)="selectImage($event, 'profile')"
     />
 
-    <!-- <ion-card class="profile-info-container">
+    <ion-card class="profile-info-container">
       <div class="profile-info">
         <ion-card-header>
-          <ion-card-subtitle>Recipe Master</ion-card-subtitle>
-          <ion-card-title>Buttpie and Tornado</ion-card-title>
+          <ion-card-subtitle>{{ user.rank }}</ion-card-subtitle>
+          <form [formGroup]="profileForm">
+            <ion-input
+            formControlName="username"
+              type="text"
+              placeholder="{{ user.username }}"
+            ></ion-input>
+            <ion-textarea
+            formControlName="description"
+              placeholder="{{
+                user.description
+                  ? user.description
+                  : 'Type your description here..'
+              }}"
+            ></ion-textarea>
+          </form>
         </ion-card-header>
 
-        <ion-card-content>
-          Keep close to Nature's heart... and break clear away, once in awhile,
-        </ion-card-content>
-      </div></ion-card
-    > -->
-
-    <ion-card class="profile-info-container">
-        <div class="profile-info">
-          <ion-card-header>
-           
-            <ion-card-subtitle>Recipe Master</ion-card-subtitle>
-            <ion-card-title>
-              <input type="text" placeholder="Buttpie and Tornado">
-            </ion-card-title>
-          </ion-card-header>
-  
-          <ion-card-content>
-            <input type="text" placeholder="All you need is love. But a little chocolate now and then doesn't hurt.">
-          </ion-card-content>
-        </div></ion-card
-      >
-
+        <ion-card-content> </ion-card-content></div
+    ></ion-card>
   </div>
 
-
-
-    <ion-button (click)="saveChanges()"
-    >Save</ion-button
-  >
-
+  <ion-button (click)="saveChanges()">Save</ion-button>
 </ion-content>

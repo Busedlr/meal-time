@@ -70,14 +70,14 @@ export class UserDataService {
   getImages(userId, imageType) {
     let path = imageType + "_images/" + userId;
     return this.storageRef
-    .child(path)
-    .getDownloadURL()
-    .then(url => {
-      return url;
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      .child(path)
+      .getDownloadURL()
+      .then(url => {
+        return url;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   getDefaultImages(imageType) {
@@ -95,6 +95,13 @@ export class UserDataService {
   updateMyRecipes(user) {
     this.usersRef.doc(user.id).update({
       my_recipes: user.my_recipes
+    });
+  }
+
+  updateUserInfo(user, username, description) {
+    this.usersRef.doc(user.id).update({
+      username: username,
+      description: description
     });
   }
 }

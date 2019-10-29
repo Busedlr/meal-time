@@ -15,14 +15,12 @@
     <ion-card class="profile-info-container">
       <div class="profile-info">
         <ion-card-header>
-          <ion-card-subtitle>Recipe Master</ion-card-subtitle>
+          <ion-card-subtitle>{{ user?.rank }}</ion-card-subtitle>
           <ion-card-title>{{ user?.username }}</ion-card-title>
         </ion-card-header>
 
-        <ion-card-content>
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit
-          clean.
+        <ion-card-content *ngIf="user?.description">
+         {{user.description}}
         </ion-card-content>
 
         <ion-button (click)="openModal()" class="edit-button" color="secondary" fill="outline">
