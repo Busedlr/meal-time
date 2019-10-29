@@ -13,6 +13,7 @@ export class EditProfileModalPage implements OnInit {
   user: any;
   imageToSave: any = null;
   image:any;
+  coverImage: any;
 
   constructor(
     public navParams: NavParams,
@@ -20,8 +21,9 @@ export class EditProfileModalPage implements OnInit {
     public userService: UserDataService
   ) {}
 
-  ngOnInit() {
-    console.log(this.user);
+  ngOnInit() {  
+    this.coverImage = document.getElementById('coverImage') as HTMLImageElement;
+    this.coverImage.src = this.user.coverImageUrl;
   }
 
   getProfileImage() {
@@ -49,8 +51,7 @@ export class EditProfileModalPage implements OnInit {
       file.size <= 5e6
     ) {
       this.imageToSave = file;
-      let coverImage = document.getElementById('coverImage') as HTMLImageElement;
-      coverImage.src = URL.createObjectURL(event.target.files[0]);
+      this.coverImage.src = URL.createObjectURL(file);
     }
   }
 
