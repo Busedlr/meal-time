@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ɵConsole } from "@angular/core";
 import { UserDataService } from "../../services/user-data.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ModalController } from "@ionic/angular";
@@ -31,7 +31,6 @@ export class UserPage implements OnInit {
     public modalController: ModalController
   ) {
     this.getUser();
-    console.log("user page recreated")
   }
 
   ngOnInit() {}
@@ -77,51 +76,35 @@ export class UserPage implements OnInit {
     });
   }
 
-  /* saveProfileImage() {
-    if (this.imageToSave) {
-      const path = "user_images/" + this.user.id;
-      this.userService.addProfileImage(path, this.imageToSave).then(() => {
-        this.getProfileImage();
-      });
-    }
-  }
-
-  saveCoverImage() {
-    if (this.imageToSave) {
-      const path = "cover_images/" + this.user.id;
-      this.userService.addCoverImage(path, this.imageToSave).then(() => {
-        this.getCoverImage();
-      });
-    }
+  /* getProfileImage() {
+    this.userService.getProfileImage(this.user.id).then(imageUrl => {
+      this.user.profileImageUrl = imageUrl;
+    });
   } */
 
   getProfileImage() {
     this.userService.getProfileImage(this.user.id).then(imageUrl => {
-      this.user.profileImageUrl = imageUrl;
+      if (imageUrl) {
+        this.user.profileImageUrl = imageUrl;
+      } else {
+        this.userService
+          .getDefaultProfileImage()
+          .then(url => (this.user.profileImageUrl = url));
+      }
     });
   }
 
   getCoverImage() {
     this.userService.getCoverImage(this.user.id).then(coverUrl => {
-      this.user.coverImageUrl = coverUrl;
+      if (coverUrl) {
+        this.user.coverImageUrl = coverUrl;
+      } else {
+        this.userService
+          .getDefaultCoverImage()
+          .then(url => (this.user.coverImageUrl = url));
+      }
     });
   }
-
-  /* resetInput(inputId) {
-    const fileInput = document.getElementById(inputId) as HTMLInputElement;
-    fileInput.value = "";
-  }
-
-  selectFile(event) {
-    const file = event.srcElement.files[0];
-    if (
-      file &&
-      (file.type === "image/jpeg" || file.type === "image/png") &&
-      file.size <= 5e6
-    ) {
-      this.imageToSave = file;
-    }
-  } */
 
   goToRecipeCreate() {
     this.router.navigate(["/recipe-create"], { queryParams: this.user });
@@ -146,12 +129,11 @@ export class UserPage implements OnInit {
   async openModal() {
     const modal = await this.modalController.create({
       component: EditProfileModalPage,
-      componentProps: { 
-        foo: 'hello',
-        bar: 'world',
+      componentProps: {
+        foo: "hello",
+        bar: "world",
         user: this.user
       }
-      
     });
     return await modal.present();
   }

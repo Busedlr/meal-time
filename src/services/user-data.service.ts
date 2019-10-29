@@ -80,6 +80,17 @@ export class UserDataService {
       });
   }
 
+  getDefaultProfileImage() {
+    return this.storageRef.child('default_images/profile_image.png')
+    .getDownloadURL()
+    .then(url => {
+      return url
+    })
+    .catch(e => {
+      console.log(e);
+    })
+  }
+
   getCoverImage(userId) {
     let path = "cover_images/" + userId;
     return this.storageRef
@@ -91,6 +102,17 @@ export class UserDataService {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  getDefaultCoverImage() {
+    return this.storageRef.child('default_images/cover_image.jpg')
+    .getDownloadURL()
+    .then(url => {
+      return url
+    })
+    .catch(e => {
+      console.log(e);
+    })
   }
 
   updateMyRecipes(user) {
