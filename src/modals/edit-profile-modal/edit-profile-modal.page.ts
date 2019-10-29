@@ -87,7 +87,7 @@ export class EditProfileModalPage implements OnInit {
 
 	saveChanges() {
 		if (this.profileImageToSave) {
-			const path = 'user_images/' + this.user.id;
+			const path = 'profile_images/' + this.user.id;
 			this.userService
 				.addProfileImage(path, this.profileImageToSave)
 				.then(() => {
@@ -105,7 +105,7 @@ export class EditProfileModalPage implements OnInit {
 
 	/*  saveProfileImage() {
     if (this.profileImageToSave) {
-      const path = "user_images/" + this.user.id;
+      const path = "profile_images/" + this.user.id;
       this.userService
         .addProfileImage(path, this.profileImageToSave)
         .then(() => {

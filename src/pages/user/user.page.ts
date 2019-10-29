@@ -76,19 +76,13 @@ export class UserPage implements OnInit {
     });
   }
 
-  /* getProfileImage() {
-    this.userService.getProfileImage(this.user.id).then(imageUrl => {
-      this.user.profileImageUrl = imageUrl;
-    });
-  } */
-
   getProfileImage() {
     this.userService.getProfileImage(this.user.id).then(imageUrl => {
       if (imageUrl) {
         this.user.profileImageUrl = imageUrl;
       } else {
         this.userService
-          .getDefaultProfileImage()
+          .getDefaultImages("profile")
           .then(url => (this.user.profileImageUrl = url));
       }
     });
@@ -100,7 +94,7 @@ export class UserPage implements OnInit {
         this.user.coverImageUrl = coverUrl;
       } else {
         this.userService
-          .getDefaultCoverImage()
+          .getDefaultImages("cover")
           .then(url => (this.user.coverImageUrl = url));
       }
     });

@@ -35,7 +35,7 @@ imageToSave: any;
 
   saveProfileImage() {
 		if (this.imageToSave) {
-			const path = 'user_images/' + this.user.id;
+			const path = 'profile_images/' + this.user.id;
 			this.userService.addProfileImage(path, this.imageToSave).then(() => {
 				this.getProfileImage();
 			});
