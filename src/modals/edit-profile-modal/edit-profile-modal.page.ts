@@ -50,6 +50,26 @@ export class EditProfileModalPage implements OnInit {
 		fileInput.value = '';
 	}
 
+	/* selectImage(event, type) {
+		const file = event.srcElement.files[0];
+		if (
+			file &&
+			(file.type === 'image/jpeg' || file.type === 'image/png') &&
+			file.size <= 5e6
+		) {
+
+			if (type === 'profile') {
+				this.profileImageToSave = file;
+				this.profileImage.src = URL.createObjectURL(file);
+			} else if (type === 'cover') {
+				this.coverImageToSave = file;
+				this.coverImage.src = URL.createObjectURL(file);
+			}
+    }
+    //this whole function does exactly the same thing as the other 'selectImage' function underneath. 
+    The one below is just more compact and uses a different syntax to recreate the variable names
+  } */
+
 	selectImage(event, type) {
 		const file = event.srcElement.files[0];
 		if (
@@ -57,13 +77,11 @@ export class EditProfileModalPage implements OnInit {
 			(file.type === 'image/jpeg' || file.type === 'image/png') &&
 			file.size <= 5e6
 		) {
-			if (type === 'profile') {          
-				this.profileImageToSave = file;
-				this.profileImage.src = URL.createObjectURL(file);
-			} else if (type === 'cover') {
-				this.coverImageToSave = file;
-				this.coverImage.src = URL.createObjectURL(file);
-			}
+			const imageType = type + 'Image';
+			const imageToSave = type + 'ImageToSave';
+
+			this[imageToSave] = file;
+			this[imageType].src = URL.createObjectURL(file);
 		}
 	}
 
