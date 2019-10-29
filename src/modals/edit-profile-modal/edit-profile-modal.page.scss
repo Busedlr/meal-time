@@ -30,13 +30,18 @@
   
   .profile-info {
     text-align: center;
-    padding-top: 50px;
+    padding-top: 70px;
   }
 
   .input {
       position:relative;
       opacity: 0;
       top: -100px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 20px;
   }
 
   
