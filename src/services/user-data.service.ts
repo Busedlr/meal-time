@@ -67,10 +67,22 @@ export class UserDataService {
       });
   }
 
-  getProfileImage(userId) {
-    let path = "profile_images/" + userId;
+  getImages(userId, imageType) {
+    let path = imageType + "_images/" + userId;
     return this.storageRef
-      .child(path)
+    .child(path)
+    .getDownloadURL()
+    .then(url => {
+      return url;
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+  getDefaultImages(imageType) {
+    return this.storageRef
+      .child("default_images/" + imageType + "_image.jpg")
       .getDownloadURL()
       .then(url => {
         return url;
@@ -80,35 +92,9 @@ export class UserDataService {
       });
   }
 
-
-
-  getCoverImage(userId) {
-    let path = "cover_images/" + userId;
-    return this.storageRef
-      .child(path)
-      .getDownloadURL()
-      .then(url => {
-        return url;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  getDefaultImages(imageType){
-    return this.storageRef.child('default_images/' + imageType + '_image.jpg')
-    .getDownloadURL()
-    .then(url => {
-      return url
-    })
-    .catch(e => {
-      console.log(e);
-    })
-  }
-
   updateMyRecipes(user) {
     this.usersRef.doc(user.id).update({
       my_recipes: user.my_recipes
-    })
+    });
   }
 }

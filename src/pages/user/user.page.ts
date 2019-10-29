@@ -77,7 +77,7 @@ export class UserPage implements OnInit {
   }
 
   getProfileImage() {
-    this.userService.getProfileImage(this.user.id).then(imageUrl => {
+    this.userService.getImages(this.user.id, 'profile').then(imageUrl => {
       if (imageUrl) {
         this.user.profileImageUrl = imageUrl;
       } else {
@@ -89,7 +89,7 @@ export class UserPage implements OnInit {
   }
 
   getCoverImage() {
-    this.userService.getCoverImage(this.user.id).then(coverUrl => {
+    this.userService.getImages(this.user.id, 'cover').then(coverUrl => {
       if (coverUrl) {
         this.user.coverImageUrl = coverUrl;
       } else {

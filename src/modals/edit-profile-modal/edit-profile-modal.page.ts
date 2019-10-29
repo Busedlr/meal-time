@@ -34,13 +34,13 @@ export class EditProfileModalPage implements OnInit {
 	}
 
 	getProfileImage() {
-		this.userService.getProfileImage(this.user.id).then(imageUrl => {
+		this.userService.getImages(this.user.id, 'profile').then(imageUrl => {
 			this.user.profileImageUrl = imageUrl;
 		});
 	}
 
 	getCoverImage() {
-		this.userService.getCoverImage(this.user.id).then(coverUrl => {
+		this.userService.getImages(this.user.id, 'cover').then(coverUrl => {
 			this.user.coverImageUrl = coverUrl;
 		});
 	}
