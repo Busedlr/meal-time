@@ -130,7 +130,8 @@ export class UserPage implements OnInit {
       }
     });
     modal.onDidDismiss().then(reloadUser => {
-      if (reloadUser) {
+      console.log('reload', reloadUser)
+      if (reloadUser.data) {
         this.getUser();
       }
     });

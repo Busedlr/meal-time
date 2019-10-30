@@ -97,10 +97,10 @@ export class EditProfileModalPage implements OnInit {
       controls.username.value,
       controls.description.value
     );
-    this.closeModal();
+    this.closeModal(true);
   }
 
-  closeModal() {
-    this.modalController.dismiss(true);
+  closeModal(reloadUser) {
+    this.modalController.dismiss(reloadUser);
   }
 }
