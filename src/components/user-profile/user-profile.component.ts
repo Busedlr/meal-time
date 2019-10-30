@@ -51,7 +51,7 @@ imageToSave: any;
 		}
 	}
   
-  getProfileImage() {
+  /* getProfileImage() {
 		this.userService.getProfileImage(this.user.id).then(imageUrl => {
 			this.user.profileImageUrl = imageUrl;
 		});
@@ -59,6 +59,18 @@ imageToSave: any;
 
 	getCoverImage() {
 		this.userService.getCoverImage(this.user.id).then(coverUrl => {
+			this.user.coverImageUrl = coverUrl;
+		})
+	} */
+	
+	getProfileImage() {
+		this.userService.getImages(this.user.id, 'profile').then(imageUrl => {
+			this.user.profileImageUrl = imageUrl;
+		});
+	}
+
+	getCoverImage() {
+		this.userService.getImages(this.user.id, 'cover').then(coverUrl => {
 			this.user.coverImageUrl = coverUrl;
 		})
   }
