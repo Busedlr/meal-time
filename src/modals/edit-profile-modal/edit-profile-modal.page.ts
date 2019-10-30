@@ -101,6 +101,6 @@ export class EditProfileModalPage implements OnInit {
   }
 
   closeModal() {
-    this.modalController.dismiss();
+    this.modalController.dismiss(true);
   }
 }

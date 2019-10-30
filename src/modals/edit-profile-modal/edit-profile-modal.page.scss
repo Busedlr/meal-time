@@ -1,50 +1,53 @@
 .cover-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .profile-image {
-    position: relative;
-    height: 150px;
-    width: 150px;
-    margin-top: -700px;
-    margin-left: calc(50% - 75px);
-    z-index: 4;
-    border-radius: 50%;
-  }
-  
-  
-  
-  .profile-info-container {
-    position: relative;
-    height: 250px;
-    width: 80%;
-    margin-top: -100px;
-    margin-left: calc(10%);
-    margin-right: calc(10%);
-    z-index: 2;
-    background-color: white;
-    box-shadow: 2px 2px 8px #888888;
-  }
-  
-  .profile-info {
-    text-align: center;
-    padding-top: 70px;
-  }
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
 
-  .input {
-      position:relative;
-      opacity: 0;
-      top: -100px;
-  }
+.profile-image {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  top: -150px;
+  margin-left: calc(50% - 75px);
+  z-index: 4;
+  border-radius: 50%;
+}
 
-  input {
-    width: 100%;
-    padding: 12px 20px;
-  }
+.profile-info-container {
+  position: relative;
+  height: 250px;
+  width: 80%;
+  margin-top: -260px;
+  margin-left: calc(10%);
+  margin-right: calc(10%);
+  z-index: 2;
+  background-color: white;
+  box-shadow: 2px 2px 8px #888888;
+}
 
-  ion-textarea{
-    border: 1px solid #737373
-  }
-  
+.profile-info {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.input {
+  position: relative;
+  opacity: 0;
+  top: -100px;
+}
+
+ion-input {
+  border: 1px solid #737373;
+}
+
+ion-textarea {
+  position: relative;
+  border: 1px solid #737373;
+}
+
+ion-button {
+position:relative;
+left: 700px;
+top: 50px;
+}

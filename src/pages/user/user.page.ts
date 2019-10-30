@@ -28,7 +28,7 @@ export class UserPage implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public recipeService: RecipeDataService,
-    public modalController: ModalController
+    public modalCtrl: ModalController
   ) {
     this.getUser();
   }
@@ -45,6 +45,7 @@ export class UserPage implements OnInit {
           this.getAllRecipes();
           this.getProfileImage();
           this.getCoverImage();
+          console.log("user page is reloaded")
         });
       }
     });
@@ -121,16 +122,18 @@ export class UserPage implements OnInit {
   }
 
   async openModal() {
-    const modal = await this.modalController.create({
+    let modal = await this.modalCtrl.create({
       component: EditProfileModalPage,
+      cssClass: "edit-profile-modal",
       componentProps: {
-        foo: "hello",
-        bar: "world",
         user: this.user
+      }
+    });
+    modal.onDidDismiss().then(reloadUser => {
+      if (reloadUser) {
+        this.getUser();
       }
     });
     return await modal.present();
   }
 }
-
-

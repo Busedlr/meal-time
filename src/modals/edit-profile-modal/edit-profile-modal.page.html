@@ -1,65 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Edit Profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<!-- <ion-content>
-
-  <img src="{{ user?.profileImageUrl }}" alt="profile image">
-  <div>
-    passed info is : {{ passedInfo }}
-  </div>
-  <label for="userImage" (click)="resetInput('userImage')"
-    >Add a profile photo</label
-  >
-  <input type="file" id="userImage" (change)="selectFile($event)" />
-
-  <label for="coverImage" (click)="resetInput('coverImage')"
-    >add a cover photo</label
-  >
-  <input type="file" id="coverImage" (change)="selectFile($event)" />
-
-  <ion-button [disabled]="!imageToSave" (click)="saveCoverImage()"
-    >Save cover Image</ion-button
-  >
-  <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
-    >Save profile Image</ion-button
-  >
-
-  <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
-  <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
-  <ion-button color="danger" (click)="closeModal()">Close</ion-button>
-</ion-content> -->
-
-<!-- <ion-content>
-
-    <img src="{{ user?.profileImageUrl }}" alt="profile image">
-    <div>
-      passed info is : {{ passedInfo }}
-    </div>
-    <label for="userImage" (click)="resetInput('userImage')"
-      >Add a profile photo</label
-    >
-    <input type="file" id="userImage" (change)="selectFile($event)" />
-  
-    <label for="coverImage" (click)="resetInput('coverImage')"
-      >add a cover photo</label
-    >
-    <input type="file" id="coverImage" (change)="selectFile($event)" />
-  
-    <ion-button [disabled]="!imageToSave" (click)="saveCoverImage()"
-      >Save cover Image</ion-button
-    >
-    <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
-      >Save profile Image</ion-button
-    >
-  
-    <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
-    <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
-    <ion-button color="danger" (click)="closeModal()">Close</ion-button>
-  </ion-content> -->
-
 <ion-content>
   <div class="main-container">
     <label for="coverImageInput" (click)="resetInput('coverImage')"
@@ -90,12 +28,12 @@
           <ion-card-subtitle>{{ user.rank }}</ion-card-subtitle>
           <form [formGroup]="profileForm">
             <ion-input
-            formControlName="username"
+              formControlName="username"
               type="text"
               placeholder="{{ user.username }}"
             ></ion-input>
             <ion-textarea
-            formControlName="description"
+              formControlName="description"
               placeholder="{{
                 user.description
                   ? user.description
@@ -103,9 +41,7 @@
               }}"
             ></ion-textarea>
           </form>
-        </ion-card-header>
-
-        <ion-card-content> </ion-card-content></div
+        </ion-card-header></div
     ></ion-card>
   </div>
 
