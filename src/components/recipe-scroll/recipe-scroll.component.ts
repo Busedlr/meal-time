@@ -11,10 +11,13 @@ export class RecipeScrollComponent implements OnInit {
   user: any;
   @Input() recipes: [];
   @Input() recipeListName: any;
-  
+  scroll: boolean = false;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   slideOpts = {
     slidesPerView: 4,
@@ -27,6 +30,17 @@ export class RecipeScrollComponent implements OnInit {
       slideShadows: true
     }
   };
+
+scrolling() {
+  this.slides.length().then(res => {
+    console.log('res', res)
+    if(res > 4) {
+      this.scroll = true;
+      console.log('scroll', this.scroll)
+    }
+  })
+      
+}
 
   // merge these 2 functions into one
   next() {

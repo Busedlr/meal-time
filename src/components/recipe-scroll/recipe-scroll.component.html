@@ -15,6 +15,7 @@
   </ion-slides>
 
   <ion-icon
+  *ngIf="scroll"
     ios="ios-arrow-dropleft-circle"
     md="md-arrow-dropleft-circle"
     type="submit"
@@ -26,12 +27,22 @@
   ></ion-icon>
 
   <ion-icon
+  *ngIf="scroll"
     ios="ios-arrow-dropright-circle"
     md="md-arrow-dropright-circle"
-    type="submit"
     float-right
     color="primary"
     class="btnNext"
     (click)="next()"
     size="large"
   ></ion-icon>
+
+
+  <ion-icon
+  ios="ios-arrow-dropright-circle"
+  md="md-arrow-dropright-circle"
+  float-right
+  color="primary"
+  (click)="scrolling()"
+  size="small"
+></ion-icon>
