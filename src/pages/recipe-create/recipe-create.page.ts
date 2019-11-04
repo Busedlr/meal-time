@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { RecipeDataService } from "../../services/recipe-data.service";
 import { UserDataService } from "src/services/user-data.service";
 import {
@@ -28,6 +28,8 @@ export class RecipeCreatePage implements OnInit {
   imageValid: boolean = false;
   file: any;
   recipeImageInput: string = "recipeImage";
+  controlMenu: boolean;
+  showMenu: boolean;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -37,6 +39,11 @@ export class RecipeCreatePage implements OnInit {
   ) {
     this.initForm();
     this.getUser();
+  }
+
+  @HostListener("window:click", ["$event"])
+  clickout() {
+    this.closeDropdown();
   }
 
   ngOnInit() {}
@@ -76,6 +83,7 @@ export class RecipeCreatePage implements OnInit {
           Validators.required
         ])
       ],
+      category: ["", Validators.required],
       servings: [8, Validators.required],
       prepTime: [15, Validators.required],
       cookingTime: [20, Validators.required],
@@ -85,6 +93,29 @@ export class RecipeCreatePage implements OnInit {
     this.initIngredientControls();
     this.initStepControls();
     this.imageValid = false;
+  } 
+
+  openDropdown(ev) {
+    this.showMenu = !this.showMenu;
+    this.controlMenu = true;
+
+    if (!this.showMenu) {
+      ev.stopPropagation();
+      this.controlMenu = false;
+    }
+  }
+
+  closeDropdown() {
+    this.showMenu = false;
+
+    if (this.controlMenu) {
+      this.showMenu = true;
+      this.controlMenu = false;
+    }
+  }
+ 
+  chooseCategory(data) {
+    this.recipeForm.controls['category'].setValue(data);
   }
 
   saveRecipe() {

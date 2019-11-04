@@ -1,75 +1,105 @@
 <ion-content>
-  <form [formGroup]="recipeForm">
-    <ion-item>
-      <ion-label position="floating">Recipe Name</ion-label>
-      <ion-input autofocus formControlName="name"></ion-input>
-    </ion-item>
+  <app-header></app-header>
+  <ion-card class="main-container">
+    <form [formGroup]="recipeForm">
+      <ion-item>
+        <ion-label position="floating">Recipe Name</ion-label>
+        <ion-input autofocus formControlName="name"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Servings</ion-label>
-      <ion-input type="number" formControlName="servings"></ion-input>
-    </ion-item>
+      <ion-button (click)="openDropdown($event)">
+        Recipes
+      </ion-button>
 
-    <ion-item>
-      <ion-label position="floating">Prep time in minutes</ion-label>
-      <ion-input type="number" formControlName="prepTime"></ion-input>
-    </ion-item>
+      <ion-list *ngIf="showMenu" class="fadeIn dropdown-list">
+        <ion-item>
+          <ion-label (click)="chooseCategory('vegeterian')">Vegeterian</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Beef</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Chicken</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Desserts</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Breakfast</ion-label>
+        </ion-item>
+      </ion-list>
 
-    <ion-item>
-      <ion-label position="floating">Cooking time in minutes</ion-label>
-      <ion-input type="number" formControlName="cookingTime"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Category</ion-label>
+        <ion-input formControlName="category"></ion-input>
+      </ion-item>
 
-    <ion-label position="fixed">Ingredients</ion-label>
-    <ion-item *ngFor="let control of ingredientControls; let i = index">
-      <ion-input
-        type="text"
-        [formControlName]="control.name"
-        placeHolder="ingredient name..."
-        id="{{ control.name }}"
-      ></ion-input>
-      <ion-icon
-        *ngIf="ingredientControls.length > 1"
-        (click)="removeIngredientControl(control, i)"
-        name="close-circle"
-      ></ion-icon>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Servings</ion-label>
+        <ion-input type="number" formControlName="servings"></ion-input>
+      </ion-item>
 
-    <ion-button expand="full" color="light" (click)="addIngredientControl()"
-      >Add Ingredient</ion-button
+      <ion-item>
+        <ion-label position="floating">Prep time in minutes</ion-label>
+        <ion-input type="number" formControlName="prepTime"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Cooking time in minutes</ion-label>
+        <ion-input type="number" formControlName="cookingTime"></ion-input>
+      </ion-item>
+
+      <ion-label position="fixed">Ingredients</ion-label>
+      <ion-item *ngFor="let control of ingredientControls; let i = index">
+        <ion-input
+          type="text"
+          [formControlName]="control.name"
+          placeHolder="ingredient name..."
+          id="{{ control.name }}"
+        ></ion-input>
+        <ion-icon
+          *ngIf="ingredientControls.length > 1"
+          (click)="removeIngredientControl(control, i)"
+          name="close-circle"
+        ></ion-icon>
+      </ion-item>
+
+      <ion-button expand="full" color="light" (click)="addIngredientControl()"
+        >Add Ingredient</ion-button
+      >
+
+      <ion-label position="fixed">Steps</ion-label>
+      <ion-item *ngFor="let control of stepControls; let i = index">
+        <ion-input
+          type="text"
+          [formControlName]="control.name"
+          placeHolder="next step is..."
+        ></ion-input>
+        <ion-icon
+          *ngIf="stepControls.length > 1"
+          (click)="removeStepControl(control, i)"
+          name="close-circle"
+        ></ion-icon>
+      </ion-item>
+
+      <ion-button expand="full" color="light" (click)="addStepControl()"
+        >Add another step</ion-button
+      >
+    </form>
+
+    <label for="recipeImage" (click)="resetInput(recipeImageInput)"
+      >Add an image for your recipe</label
     >
+    <input
+      type="file"
+      id="{{ recipeImageInput }}"
+      (change)="selectFile($event)"
+    />
 
-    <ion-label position="fixed">Steps</ion-label>
-    <ion-item *ngFor="let control of stepControls; let i = index">
-      <ion-input
-        type="text"
-        [formControlName]="control.name"
-        placeHolder="next step is..."
-      ></ion-input>
-      <ion-icon
-        *ngIf="stepControls.length > 1"
-        (click)="removeStepControl(control, i)"
-        name="close-circle"
-      ></ion-icon>
-    </ion-item>
-
-    <ion-button expand="full" color="light" (click)="addStepControl()"
-      >Add another step</ion-button
+    <ion-button
+      [disabled]="!recipeForm.valid || !imageValid"
+      (click)="saveRecipe()"
+      >Save Recipe</ion-button
     >
-  </form>
-
-  <label for="recipeImage" (click)="resetInput(recipeImageInput)"
-    >Add an image for your recipe</label
-  >
-  <input
-    type="file"
-    id="{{ recipeImageInput }}"
-    (change)="selectFile($event)"
-  />
-
-  <ion-button
-    [disabled]="!recipeForm.valid || !imageValid"
-    (click)="saveRecipe()"
-    >Save Recipe</ion-button
-  >
+  </ion-card>
 </ion-content>
