@@ -13,7 +13,8 @@ export class RecipeScrollComponent implements OnInit {
   @Input() recipeListName: any;
   scroll: boolean = false;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     

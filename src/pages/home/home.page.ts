@@ -25,9 +25,11 @@ export class HomePage {
   @ViewChild("slides", { static: false }) slides: IonSlides;
   user: any;
   allRecipes: any = [];
+  recipesBy: any = [];
   controlMenu: boolean;
   showMenu: boolean;
   showHeader: boolean = true;
+  category: boolean = false;
 
   slideOpts = {
     slidesPerView: 1,
@@ -106,7 +108,32 @@ export class HomePage {
     this.router.navigate(["/user"], { queryParams: this.user });
   }
 
-  filterRecipes(type) {
-    console.log(type + "recipes");
+  filterRecipes(category) {
+    if (category == 'all') {
+      this.category = false;
+    } else {
+      this.category = true;
+    }
+
+    this.recipesBy = [];
+    this.recipeService.getRecipesBy(category).then(result => {
+      result.docs.forEach(doc => {
+        const recipe = doc.data();
+        recipe.id = doc.id;
+        this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
+          recipe.imageUrl = url;
+          this.recipesBy.push(recipe);
+        });
+      });
+    });
+  }
+
+  searchRecipes(ev) {
+   
+
+    if( ev.key == 'enter' ) {
+      console.log('event value', ev.srcElement.value )
+      this.recipeService.searchRecipes(ev.srcElement.value)
+    }
   }
 }

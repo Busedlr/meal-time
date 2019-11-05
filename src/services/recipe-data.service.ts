@@ -24,7 +24,7 @@ export class RecipeDataService {
       .add(recipeData)
       .then(doc => {
         console.log("document saved with id", doc.id);
-        return doc
+        return doc;
       })
       .catch(error => {
         console.log(error);
@@ -57,7 +57,18 @@ export class RecipeDataService {
     /* this.getRecipeImage(); */
   }
 
- 
+  getRecipesBy(category) {
+    console.log(category)
+    return this.recipesRef
+      .where("category", "==", category)
+      .get()
+      .then(result => {
+        return result;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   getAllRecipes() {
     return this.recipesRef
@@ -68,6 +79,10 @@ export class RecipeDataService {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  searchRecipes(data) {
+
   }
 
   getRecipeImageUrl(path) {

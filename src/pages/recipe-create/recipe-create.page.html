@@ -13,19 +13,19 @@
 
       <ion-list *ngIf="showMenu" class="fadeIn dropdown-list">
         <ion-item>
-          <ion-label (click)="chooseCategory('vegeterian')">Vegeterian</ion-label>
+          <ion-label (click)="chooseCategory('vegetarian')">Vegetarian</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Beef</ion-label>
+          <ion-label (click)="chooseCategory('beef')">Beef</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Chicken</ion-label>
+          <ion-label (click)="chooseCategory('chicken')">Chicken</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Desserts</ion-label>
+          <ion-label (click)="chooseCategory('dessert')">Dessert</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Breakfast</ion-label>
+          <ion-label (click)="chooseCategory('breakfast')">Breakfast</ion-label>
         </ion-item>
       </ion-list>
 

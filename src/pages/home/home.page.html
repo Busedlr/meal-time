@@ -1,7 +1,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <app-header *ngIf="showHeader"></app-header>
   <div class="main-container">
-    <ion-slides #slides [options]="slideOpts"  autoplayDisableOnInteraction="false">
+    <ion-slides  #slides [options]="slideOpts"  autoplayDisableOnInteraction="false">
       <ion-slide *ngFor="let recipe of allRecipes">
         <img
           src="{{ recipe.imageUrl }}"
@@ -12,33 +12,40 @@
       </ion-slide>
     </ion-slides>
 
+    
     <div>
+      <ion-toolbar>
       <ion-buttons>
         <ion-button (click)="openDropdown($event)">
           Recipes
         </ion-button>
-        <ion-searchbar showCancelButton="focus"></ion-searchbar>
+        <ion-searchbar showCancelButton="focus" (keyup)="searchRecipes($event)"></ion-searchbar>
       </ion-buttons>
+    </ion-toolbar>
     </div>
 
     <ion-list *ngIf="showMenu" class="fadeIn dropdown-list">
       <ion-item>
-        <ion-label (click)="filterRecipes('vegetarian')">Vegeterian</ion-label>
+        <ion-label (click)="filterRecipes('vegetarian')">Vegetarian</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label (click)="filterRecipes('Beef')">Beef</ion-label>
+        <ion-label (click)="filterRecipes('beef')">Beef</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label (click)="filterRecipes('Chicken')">Chicken</ion-label>
+        <ion-label (click)="filterRecipes('chicken')">Chicken</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label (click)="filterRecipes('Desserts')">Desserts</ion-label>
+        <ion-label (click)="filterRecipes('desserts')">Desserts</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label (click)="filterRecipes('Breakfast')">Breakfast</ion-label>
+        <ion-label (click)="filterRecipes('breakfast')">Breakfast</ion-label>
       </ion-item>
+      <ion-item>
+          <ion-label (click)="filterRecipes('all')">All recipes</ion-label>
+        </ion-item>
     </ion-list>
 
-    <app-recipe-scroll-down [recipes]="allRecipes"> </app-recipe-scroll-down>
+    <app-recipe-scroll-down *ngIf="!category" [recipes]="allRecipes"> </app-recipe-scroll-down>
+    <app-recipe-scroll-down *ngIf="category" [recipes]="recipesBy"> </app-recipe-scroll-down>
   </div>
 </ion-content>
