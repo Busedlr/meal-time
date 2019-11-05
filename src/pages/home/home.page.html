@@ -19,7 +19,7 @@
         <ion-button (click)="openDropdown($event)">
           Recipes
         </ion-button>
-        <ion-searchbar showCancelButton="focus" (keyup)="searchRecipes($event)"></ion-searchbar>
+        <ion-searchbar (keyup)="searchRecipes($event)" (ionChange)="cancelSearch($event)"></ion-searchbar>
       </ion-buttons>
     </ion-toolbar>
     </div>
@@ -45,7 +45,6 @@
         </ion-item>
     </ion-list>
 
-    <app-recipe-scroll-down *ngIf="!category" [recipes]="allRecipes"> </app-recipe-scroll-down>
-    <app-recipe-scroll-down *ngIf="category" [recipes]="recipesBy"> </app-recipe-scroll-down>
+    <app-recipe-scroll-down [recipes]="displayRecipes"> </app-recipe-scroll-down>
   </div>
 </ion-content>

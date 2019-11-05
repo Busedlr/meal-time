@@ -1,53 +1,36 @@
 .card-container {
-  margin: 0 -15px;
+	margin: 0 -15px;
 }
 
 ion-card img {
-  height: 150px;
-  object-fit: cover;
-}
-
-ion-card img:hover {
-  height: 120px;
-  object-fit: cover;
-  opacity: 0.6;
-  ion-card-subtitle {
-    opacity: 1;
-  }
+	height: 150px;
+	object-fit: cover;
 }
 
 ion-card-content {
-  height: 130px;
+	height: 130px;
 }
 
 ion-card-subtitle {
-  opacity: 0;
+	opacity: 0;
 }
 
 ion-card:hover {
-  cursor: pointer;
-  img {
+	cursor: pointer;
+	.subtitle {
+		opacity: 1;
+  }
+  .reduce {
     height: 120px;
     object-fit: cover;
     opacity: 0.6;
   }
-  ion-card-subtitle {
-    opacity: 1;
-  }
 }
 
-
-
-
-/* .recipeImage {
-  img {
-    height: 200px;
-    object-fit: cover;
-  }
+.capitalize {
+	text-transform: capitalize;
 }
 
-.recipeImage:hover {
-  cursor: pointer;
-  opacity: 0.6;
+.reduce, .subtitle {
+	transition: all 0.2s ease-in-out;
 }
- */

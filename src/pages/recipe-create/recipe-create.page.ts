@@ -121,19 +121,24 @@ export class RecipeCreatePage implements OnInit {
   saveRecipe() {
     let recipeData = { ingredients: [], steps: [] };
 
+    const lowerCaseName = this.recipeForm.controls.name.value.toLowerCase();
+
+    this.recipeForm.controls.name.setValue(lowerCaseName);
+
+    recipeData["path"] = "recipe_images/" + this.recipeForm.controls.name.value;
+    recipeData["userId"] = this.user.id;
+
     Object.keys(this.recipeForm.controls).forEach(key => {
-      const value = this.recipeForm.controls[key].value;
-      recipeData["path"] =
-        "recipe_images/" + this.recipeForm.controls.name.value;
-      recipeData["userId"] = this.user.id;
+      const controlValue = this.recipeForm.controls[key].value;
       if (key.includes("ingredient")) {
-        recipeData.ingredients.push(value);
+        recipeData.ingredients.push(controlValue);
       } else if (key.includes("step")) {
-        recipeData.steps.push(value);
+        recipeData.steps.push(controlValue);
       } else {
-        recipeData[key] = value;
+        recipeData[key] = controlValue;
       }
     });
+
     this.recipeService.saveRecipe(recipeData).then(doc => {
       this.recipeService
         .addRecipeImage(this.file, recipeData["path"])

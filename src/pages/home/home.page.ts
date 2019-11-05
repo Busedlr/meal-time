@@ -24,12 +24,13 @@ export class HomePage {
   }
   @ViewChild("slides", { static: false }) slides: IonSlides;
   user: any;
+  displayRecipes: any = [];
   allRecipes: any = [];
-  recipesBy: any = [];
+  categoryRecipes: any = [];
+  searchedRecipes: any = [];
   controlMenu: boolean;
   showMenu: boolean;
   showHeader: boolean = true;
-  category: boolean = false;
 
   slideOpts = {
     slidesPerView: 1,
@@ -101,6 +102,7 @@ export class HomePage {
           this.allRecipes.push(recipe);
         });
       });
+      this.displayRecipes = this.allRecipes;
     });
   }
 
@@ -110,30 +112,44 @@ export class HomePage {
 
   filterRecipes(category) {
     if (category == 'all') {
-      this.category = false;
+      this.displayRecipes = this.allRecipes;
     } else {
-      this.category = true;
-    }
-
-    this.recipesBy = [];
-    this.recipeService.getRecipesBy(category).then(result => {
-      result.docs.forEach(doc => {
-        const recipe = doc.data();
-        recipe.id = doc.id;
-        this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
-          recipe.imageUrl = url;
-          this.recipesBy.push(recipe);
+      this.categoryRecipes = [];
+      this.recipeService.getcategoryRecipes(category).then(result => {
+        result.docs.forEach(doc => {
+          const recipe = doc.data();
+          recipe.id = doc.id;
+          this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
+            recipe.imageUrl = url;
+            this.categoryRecipes.push(recipe);
+          });
         });
+        this.displayRecipes = this.categoryRecipes;
       });
-    });
+    }
   }
 
   searchRecipes(ev) {
-   
+    this.searchedRecipes = [];
+    if( ev.keyCode === 13 ) {
+      const query = ev.srcElement.value.toLowerCase();
+      this.recipeService.searchRecipes(query).then((result) => {
+        result.docs.forEach(doc => {
+          const recipe = doc.data();
+          recipe.id = doc.id;
+          this.recipeService.getRecipeImageUrl(recipe.path).then(url => {
+            recipe.imageUrl = url;
+            this.searchedRecipes.push(recipe);
+          });
+        });
+        this.displayRecipes = this.searchedRecipes;
+      })
+    }
+  }
 
-    if( ev.key == 'enter' ) {
-      console.log('event value', ev.srcElement.value )
-      this.recipeService.searchRecipes(ev.srcElement.value)
+  cancelSearch(ev) {
+    if (!ev.detail.value) {
+      this.displayRecipes = this.allRecipes;
     }
   }
 }

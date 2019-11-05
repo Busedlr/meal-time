@@ -9,10 +9,11 @@
               alt="recipe image"
               [routerLink]="'/recipe-detail/' + recipe.id"
               routerDirection="forward"
+              class="reduce"
             />
           </ion-card-content>
-          <ion-card-header>
-            <ion-card-subtitle>{{ recipe.category }}</ion-card-subtitle>
+          <ion-card-header class="capitalize">
+            <ion-card-subtitle class="subtitle">{{ recipe.category }}</ion-card-subtitle>
             <ion-card-title>{{ recipe.name }}</ion-card-title>
           </ion-card-header>
         </ion-card>
