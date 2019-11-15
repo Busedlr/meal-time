@@ -20,10 +20,15 @@
         </ion-card-header>
 
         <ion-card-content *ngIf="user?.description">
-         {{user.description}}
+          {{ user.description }}
         </ion-card-content>
 
-        <ion-button (click)="openModal()" class="edit-button" color="secondary" fill="outline">
+        <ion-button
+          (click)="openModal()"
+          class="edit-button"
+          color="secondary"
+          fill="outline"
+        >
           Edit
           <ion-icon slot="end" name="create"></ion-icon>
         </ion-button>
@@ -34,7 +39,7 @@
       <ion-row>
         <ion-col size-xs="12" size-sm="6" size-lg="3">
           <ion-button
-            color="light"
+            [ngClass]="{ active: segment == 'savedRecipes' }"
             expand="full"
             (click)="changeSegment('savedRecipes')"
             >Saved Recipes</ion-button
@@ -42,7 +47,7 @@
         </ion-col>
         <ion-col size-xs="12" size-sm="6" size-lg="3">
           <ion-button
-            color="light"
+            [ngClass]="{ active: segment == 'collections' }"
             expand="full"
             (click)="changeSegment('collections')"
             >Collections</ion-button
@@ -50,7 +55,7 @@
         </ion-col>
         <ion-col size-xs="12" size-sm="6" size-lg="3">
           <ion-button
-            color="light"
+            [ngClass]="{ active: segment == 'myRecipes' }"
             expand="full"
             (click)="changeSegment('myRecipes')"
             >My Recipes</ion-button
@@ -58,36 +63,43 @@
         </ion-col>
         <ion-col size-xs="12" size-sm="6" size-lg="3">
           <ion-button
-            color="light"
+            [ngClass]="{ active: segment === 'overview', normal: segment !== 'overview' }"
             expand="full"
             (click)="changeSegment('overview')"
             >Overview</ion-button
           >
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col size-xs="12" size-sm="3" size-lg="3">
+          <ion-button
+            expand="block"
+            *ngIf="segment === 'myRecipes'"
+            color="medium"
+            (click)="goToRecipeCreate()"
+          >
+            <div>
+              <ion-icon name="add-circle"></ion-icon>
+              <label>Add a recipe</label>
+            </div>
+          </ion-button>
+        </ion-col>
+        <ion-col size-xs="12" size-sm="9" size-lg="9">
+          <ion-searchbar
+            *ngIf="segment === 'myRecipes'"
+            (keyup)="searchRecipes($event)"
+            (ionChange)="cancelSearch($event)"
+          ></ion-searchbar>
+        </ion-col>
+        <ion-col size-xs="12" size-sm="12" size-lg="12">
+          <ion-searchbar
+            *ngIf="segment === 'savedRecipes'"
+            (keyup)="searchRecipes($event)"
+            (ionChange)="cancelSearch($event)"
+          ></ion-searchbar>
+        </ion-col>
+      </ion-row>
     </ion-grid>
-
-     <!-- <label for="userImage" (click)="resetInput('userImage')"
-      >Add a profile photo</label
-    >
-    <input type="file" id="userImage" (change)="selectFile($event)" />
-
-    <label for="coverImage" (click)="resetInput('coverImage')"
-      >add a cover photo</label
-    >
-    <input type="file" id="coverImage" (change)="selectFile($event)" />
-
-    <ion-button [disabled]="!imageToSave" (click)="saveCoverImage()"
-      >Save cover Image</ion-button
-    >
-    <ion-button [disabled]="!imageToSave" (click)="saveProfileImage()"
-      >Save profile Image</ion-button
-    > -->
-
-    <ion-button color="primary" (click)="goToRecipeCreate()">create</ion-button>
-    <ion-button color="primary" (click)="goToRecipeList()">list</ion-button>
-
-    
 
     <app-recipe-scroll-down
       *ngIf="segment === 'myRecipes'"
@@ -101,8 +113,6 @@
     >
     </app-recipe-scroll-down>
 
-    
-
     <app-recipe-scroll
       *ngIf="segment === 'overview'"
       [recipes]="allRecipes"
@@ -114,7 +124,5 @@
       [recipes]="myRecipes"
       [recipeListName]="'My Recipes'"
     ></app-recipe-scroll>
-
-    
   </div>
 </ion-content>

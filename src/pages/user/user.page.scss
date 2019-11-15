@@ -1,14 +1,3 @@
-/* .cover-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  img {
-    min-width: 100%;
-    max-height: 450px;
-  }
-} */
-
 .cover-image {
   width: 100%;
   height: 300px;
@@ -24,8 +13,6 @@
   z-index: 4;
   border-radius: 50%;
 }
-
-
 
 .profile-info-container {
   position: relative;
@@ -57,11 +44,16 @@
   width: 81%;
 }
 
+.active {
+  color: #fff;
+  border: solid olive 2px;
+  --background-hover: olive !important;
+  --background: olive !important;
+}
 
-
-
-
-
-
-
-
+.normal {
+  color: #fff;
+  border: solid olive 2px;
+  --background-hover: pink !important;
+  --background: purple !important;
+}

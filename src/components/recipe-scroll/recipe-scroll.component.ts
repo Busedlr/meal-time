@@ -20,6 +20,10 @@ export class RecipeScrollComponent implements OnInit {
     
   }
 
+  ngOnChanges() {
+    
+  }
+
   slideOpts = {
     slidesPerView: 4,
     freeMode: false,
