@@ -21,7 +21,7 @@ export class UserPage implements OnInit {
   myRecipes: any = [];
   allRecipes: any = [];
   segment: any = "overview";
-  showHeader: any = true;
+  hideHeader: any = false;
 
   constructor(
     public userService: UserDataService,
@@ -115,9 +115,9 @@ export class UserPage implements OnInit {
 
   onScroll(ev) {
     if (ev.detail.deltaY > 0) {
-      this.showHeader = false;
+      this.hideHeader = true;
     } else if (ev.detail.deltaY < 0) {
-      this.showHeader = true;
+      this.hideHeader = false;
     }
   }
 

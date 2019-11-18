@@ -15,3 +15,9 @@
 ion-title:hover {
   cursor: pointer;
 }
+
+.hidden {
+  display: hidden !important;
+  color:red;
+  background-color: red;
+}

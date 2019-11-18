@@ -30,7 +30,7 @@ export class HomePage {
   searchedRecipes: any = [];
   controlMenu: boolean;
   showMenu: boolean;
-  showHeader: boolean = true;
+  hideHeader: boolean = false;
 
   slideOpts = {
     slidesPerView: 1,
@@ -56,9 +56,9 @@ export class HomePage {
 
   onScroll(ev) {
     if (ev.detail.deltaY > 0) {
-      this.showHeader = false;
+      this.hideHeader = true;
     } else if (ev.detail.deltaY < 0) {
-      this.showHeader = true;
+      this.hideHeader = false;
     }
   }
 
