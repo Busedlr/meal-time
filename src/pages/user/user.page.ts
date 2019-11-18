@@ -9,7 +9,7 @@ import { RecipeDataService } from "src/services/recipe-data.service";
 import { EditProfileModalPage } from "src/modals/edit-profile-modal/edit-profile-modal.page";
 
 @Component({
-  selector: "app-user",
+  selector: "user",
   templateUrl: "./user.page.html",
   styleUrls: ["./user.page.scss"]
 })

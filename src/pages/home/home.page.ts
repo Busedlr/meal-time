@@ -9,7 +9,7 @@ import { RecipeDataService } from "src/services/recipe-data.service";
 import { IonSlides } from "@ionic/angular";
 
 @Component({
-  selector: "app-home",
+  selector: "home",
   templateUrl: "home.page.html",
   styleUrls: ["home.page.scss"]
 })

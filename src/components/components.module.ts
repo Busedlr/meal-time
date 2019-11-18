@@ -7,12 +7,13 @@ import { IonicModule } from "@ionic/angular";
 import {  RouterModule } from '@angular/router';
 
 import { HeaderComponent } from "./header/header.component";
-import { RecipeScrollComponent } from './recipe-scroll/recipe-scroll.component';
-import { RecipeScrollDownComponent } from './recipe-scroll-down/recipe-scroll-down.component';
+import { SlideComponent } from './slide/slide.component';
+import { RecipeListComponent } from './recipe-list/recipe-list.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, RouterModule],
-  declarations: [HeaderComponent,RecipeScrollComponent, RecipeScrollDownComponent],
-  exports: [HeaderComponent, RecipeScrollComponent, RecipeScrollDownComponent]
+  declarations: [HeaderComponent,SlideComponent, RecipeListComponent, UserProfileComponent],
+  exports: [HeaderComponent, SlideComponent, RecipeListComponent]
 })
 export class ComponentsModule {}

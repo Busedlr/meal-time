@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { IonSlides } from "@ionic/angular";
 
 @Component({
-  selector: "app-recipe-scroll",
-  templateUrl: "./recipe-scroll.component.html",
-  styleUrls: ["./recipe-scroll.component.scss"]
+  selector: "slide",
+  templateUrl: "./slide.component.html",
+  styleUrls: ["./slide.component.scss"]
 })
-export class RecipeScrollComponent implements OnInit {
+export class SlideComponent implements OnInit {
   @ViewChild("slides", { static: false }) slides: IonSlides;
   user: any;
   @Input() recipes: [];

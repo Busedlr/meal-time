@@ -10,7 +10,7 @@ import { UserDataService } from '../../services/user-data.service';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'app-signup',
+	selector: 'signup',
 	templateUrl: './signup.page.html',
 	styleUrls: ['./signup.page.scss']
 })

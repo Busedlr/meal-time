@@ -14,7 +14,7 @@ import "firebase/auth";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: "app-recipe-create",
+  selector: "recipe-create",
   templateUrl: "./recipe-create.page.html",
   styleUrls: ["./recipe-create.page.scss"]
 })

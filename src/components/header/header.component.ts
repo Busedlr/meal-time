@@ -6,7 +6,7 @@ import { UserDataService } from "src/services/user-data.service";
 import { AuthService } from "src/services/auth.service";
 
 @Component({
-  selector: "app-header",
+  selector: "header",
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.scss"]
 })

@@ -1,5 +1,5 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
-  <app-header [ngClass]="{'hidden': hideHeader}"></app-header>
+  <header [ngClass]="{'hidden': hideHeader}"></header>
   <div class="main-container">
     <img
       class="cover-image"
@@ -101,28 +101,27 @@
       </ion-row>
     </ion-grid>
 
-    <app-recipe-scroll-down
-      *ngIf="segment === 'myRecipes'"
+    <recipe-list *ngIf="segment === 'myRecipes'"
       [recipes]="myRecipes"
     >
-    </app-recipe-scroll-down>
+    </recipe-list>
 
-    <app-recipe-scroll-down
+    <recipe-list
       *ngIf="segment === 'savedRecipes'"
       [recipes]="allRecipes"
     >
-    </app-recipe-scroll-down>
+    </recipe-list>
 
-    <app-recipe-scroll
+    <slide
       *ngIf="segment === 'overview'"
       [recipes]="allRecipes"
       [recipeListName]="'All Recipes'"
-    ></app-recipe-scroll>
+    ></slide>
 
-    <app-recipe-scroll
+    <slide
       *ngIf="segment === 'overview'"
       [recipes]="myRecipes"
       [recipeListName]="'My Recipes'"
-    ></app-recipe-scroll>
+    ></slide>
   </div>
 </ion-content>

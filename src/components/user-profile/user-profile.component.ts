@@ -3,7 +3,7 @@ import * as firebase from "firebase/app";
 import { UserDataService } from "src/services/user-data.service";
 
 @Component({
-  selector: "app-user-profile",
+  selector: "user-profile",
   templateUrl: "./user-profile.component.html",
   styleUrls: ["./user-profile.component.scss"]
 })

@@ -3,7 +3,7 @@ import { RecipeDataService } from "../../services/recipe-data.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: "app-recipe-detail",
+  selector: "recipe-detail",
   templateUrl: "./recipe-detail.page.html",
   styleUrls: ["./recipe-detail.page.scss"]
 })

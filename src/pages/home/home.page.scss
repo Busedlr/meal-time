@@ -49,3 +49,15 @@ ion-card img {
   z-index: 9;
 }
 
+.hidden {
+  display: none;
+}
+
+header {
+  /* visibility: hidden; */
+  /* position: fixed;
+  top: 0; */
+  position: fixed;
+  width: calc(70% - 16px);
+  margin-left: 15%;
+}

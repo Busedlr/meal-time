@@ -1,23 +1,14 @@
 .toolbar-container {
-  width: 70%;
-  margin-left: calc((100% - 70%) / 2);
   --ion-toolbar-background: #fff;
   box-shadow: 1px 2px #d7d8da;
-  position: sticky;
-  top: 0;
   z-index: 10;
 }
 
-.nav-up {
+/* .nav-up {
   top: -40px;
-}
+} */
 
 ion-title:hover {
   cursor: pointer;
 }
 
-.hidden {
-  display: hidden !important;
-  color:red;
-  background-color: red;
-}

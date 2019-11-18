@@ -1,5 +1,7 @@
 <ion-content [scrollEvents]="true" (ionScroll)="onScroll($event)">
-  <app-header [ngClass]="{'hidden': hideHeader}"></app-header>
+  <!-- <header [ngClass]="{'hidden': hideHeader}"></header> -->
+
+  <header></header>
   <div class="main-container">
     <ion-slides  #slides [options]="slideOpts"  autoplayDisableOnInteraction="false">
       <ion-slide *ngFor="let recipe of allRecipes">
@@ -45,6 +47,6 @@
         </ion-item>
     </ion-list>
 
-    <app-recipe-scroll-down [recipes]="displayRecipes"> </app-recipe-scroll-down>
+    <recipe-list [recipes]="displayRecipes"> </recipe-list>
   </div>
 </ion-content>
